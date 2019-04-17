@@ -6,13 +6,8 @@
 class Peca {
 private:
 	std::string cor;
-	int linha;
-	int coluna;
 public:
-	Peca(std::string, int, int);
-	std::string getCor();
-	int getLinha();
-	int getColuna();
+	Peca(std::string);
 };
 
 #endif /* PECA_H_ */
