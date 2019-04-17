@@ -1,18 +1,15 @@
-/*
- * Rei.h
- *
- *  Created on: 15 de abr de 2019
- *      Author: Will
- */
 
 #ifndef REI_H_
 #define REI_H_
 
-class Rei
-{
+#include <iostream>
+
+class Rei{
+private:
 public:
-	Rei();
-	virtual ~Rei();
+	Rei(std::string, int, int);
+	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	void desenha();
 };
 
 #endif /* REI_H_ */

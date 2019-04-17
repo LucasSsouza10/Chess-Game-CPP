@@ -8,11 +8,14 @@
 #ifndef PEAO_H_
 #define PEAO_H_
 
+#include <iostream>
+
 class Peao
 {
 public:
-	Peao();
-	virtual ~Peao();
+	Peao(std::string, int, int);
+	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	void desenha();
 };
 
 #endif /* PEAO_H_ */

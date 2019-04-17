@@ -8,11 +8,14 @@
 #ifndef TORRE_H_
 #define TORRE_H_
 
+#include <iostream>
+
 class Torre
 {
 public:
-	Torre();
-	virtual ~Torre();
+	Torre(std::string, int, int);
+	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	void desenha();
 };
 
 #endif /* TORRE_H_ */
