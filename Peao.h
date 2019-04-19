@@ -9,11 +9,12 @@
 #define PEAO_H_
 
 #include <iostream>
+#include "Peca.h"
 
-class Peao
+class Peao : virtual public Peca
 {
 public:
-	Peao(std::string, int, int);
+	Peao(char);
 	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	void desenha();
 };

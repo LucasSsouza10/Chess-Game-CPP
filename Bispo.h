@@ -9,11 +9,12 @@
 #define BISPO_H_
 
 #include <iostream>
+#include "Peca.h"
 
-class Bispo
+class Bispo : virtual public Peca
 {
 public:
-	Bispo(std::string, int, int);
+	Bispo(char);
 	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	void desenha();
 };

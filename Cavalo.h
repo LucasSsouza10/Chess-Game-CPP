@@ -8,11 +8,12 @@
 #ifndef CAVALO_H_
 #define CAVALO_H_
 #include <iostream>
+#include "Peca.h"
 
-class Cavalo
+class Cavalo : virtual public Peca
 {
 public:
-	Cavalo(std::string, int, int);
+	Cavalo(char);
 	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	void desenha();
 };

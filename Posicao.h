@@ -4,13 +4,15 @@
 
 #include "Peca.h"
 
+
 class Posicao {
 private:
 	Peca pca;
+	char cor;
 	char linha;
 	int coluna;
 public:
-	Posicao(char, int);
+	Posicao(char, int, char);
 	char getLinha();
 	int getColuna();
 };

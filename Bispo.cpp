@@ -6,6 +6,7 @@
  */
 
 #include "Bispo.h"
+#include "Peca.h"
 
 Bispo::Bispo()
 {

@@ -9,11 +9,12 @@
 #define TORRE_H_
 
 #include <iostream>
+#include "Peca.h"
 
-class Torre
+class Torre : virtual public Peca
 {
 public:
-	Torre(std::string, int, int);
+	Torre(char);
 	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	void desenha();
 };

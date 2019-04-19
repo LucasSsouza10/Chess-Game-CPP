@@ -4,10 +4,12 @@
 #include <iostream>
 
 class Peca {
-private:
-	std::string cor;
+protected:
+	char cor;
 public:
-	Peca(std::string);
+	virtual ~Peca(){	}
+	virtual bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	virtual void desenha();
 };
 
 #endif /* PECA_H_ */

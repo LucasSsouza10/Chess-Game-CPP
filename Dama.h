@@ -9,11 +9,12 @@
 #define DAMA_H_
 
 #include <iostream>
+#include "Peca.h"
 
-class Dama
+class Dama : virtual public Peca
 {
 public:
-	Dama(std::string, int, int);
+	Dama(char);
 	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	void desenha();
 };
