@@ -1,21 +1,18 @@
-/*
- * Peao.h
- *
- *  Created on: 15 de abr de 2019
- *      Author: Will
- */
-
 #ifndef PEAO_H_
 #define PEAO_H_
 
 #include <iostream>
 #include "Peca.h"
+#include "Posicao.h"
 
-class Peao : virtual public Peca
+class Peao
 {
+private:
+	char cor;
+	std::string situacao; //"capturada" ou "em jogo"
 public:
 	Peao(char);
-	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	bool checaMovimento(Posicao origem, Posicao destino);
 	void desenha();
 };
 

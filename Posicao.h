@@ -15,6 +15,9 @@ public:
 	Posicao(char, int, char);
 	char getLinha();
 	int getColuna();
+	char getCor();
+	bool isOcupada();
+
 };
 
 #endif /* POSICAO_H_ */

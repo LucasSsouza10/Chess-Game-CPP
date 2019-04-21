@@ -1,20 +1,43 @@
-/*
- * Peao.cpp
- *
- *  Created on: 15 de abr de 2019
- *      Author: Will
- */
-
 #include "Peao.h"
 
-Peao::Peao()
-{
-	// TODO Auto-generated constructor stub
-
+Peao::Peao(char c){
+	cor = c;
 }
 
-Peao::~Peao()
-{
-	// TODO Auto-generated destructor stub
+bool Peao::checaMovimento(Posicao origem, Posicao destino){
+	if((cor == 'B' && origem.getLinha() < destino.getLinha()) ||
+		(cor == 'P' && origem.getLinha() > destino.getLinha()))
+	{
+
+		return false;  // peao não pode movimentar para tras
+	}
+
+	if( origem.getColuna() != destino.getColuna() )
+	{
+	// peao não pode movimentar horizontalmente
+	//  a menos que ira capturar uma peca inimiga
+		if( origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
+		{
+		// para capturar a peca inimiga presisa estar lá
+			if(destino.isOcupada() && destino.getCor() != cor)
+				return true;
+			else
+				return false;
+		}
+	}
+
+	//peao pode movimentar apenas uma casa por vez
+	if(origem.getLinha() - destino.getLinha() != 1  || origem.getLinha()  - destino.getLinha() != -1){
+		//a não ser que seja seu primeiro movimento
+		if((origem.getLinha() == 2 && cor == 'B') || (origem.getLinha() == 7 && cor == 'P'))
+			return true;
+		else
+			return false;
+	}
+
+	return true;
 }
 
+void Peao::desenha(){
+
+}
