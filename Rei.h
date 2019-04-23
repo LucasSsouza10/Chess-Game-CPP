@@ -4,12 +4,13 @@
 
 #include <iostream>
 #include "Peca.h"
+#include "Posicao.h"
 
 class Rei : vitual public Peca
 {
 public:
 	Rei(char);
-	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	bool checaMovimento(Posicao origem, Posicao destino);
 	void desenha();
 };
 
