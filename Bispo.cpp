@@ -6,16 +6,27 @@
  */
 
 #include "Bispo.h"
-#include "Peca.h"
+#include "Posicao.h"
 
-Bispo::Bispo()
+Bispo::Bispo(char)
 {
-	// TODO Auto-generated constructor stub
 
 }
 
 Bispo::~Bispo()
 {
-	// TODO Auto-generated destructor stub
+
 }
+
+bool Bispo::checaMovimento(Posicao origem, Posicao destino)
+{
+	if (destino.getLinha - origem.getLinha == destino.getColuna - origem.getColuna)
+		return true;
+	else
+		return false;
+}
+
+
+
+
 

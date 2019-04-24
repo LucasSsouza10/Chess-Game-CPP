@@ -7,14 +7,19 @@
 
 #ifndef CAVALO_H_
 #define CAVALO_H_
+
 #include <iostream>
 #include "Peca.h"
+#include "Posicao.h"
 
 class Cavalo : virtual public Peca
 {
+private:
+	char cor;
+
 public:
 	Cavalo(char);
-	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	bool checaMovimento(Posicao origem, Posicao destino);
 	void desenha();
 };
 

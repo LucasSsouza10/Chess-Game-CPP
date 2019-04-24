@@ -10,12 +10,13 @@
 
 #include <iostream>
 #include "Peca.h"
+#include "Posicao.h"
 
 class Bispo : virtual public Peca
 {
 public:
 	Bispo(char);
-	bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	bool checaMovimento(Posicao origem, Posicao destino);
 	void desenha();
 };
 
