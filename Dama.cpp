@@ -8,16 +8,11 @@
 #include "Dama.h"
 #include <math.h>
 
-Dama::Dama()
+Dama::Dama(char c) : Peca(c)
 {
-	// TODO Auto-generated constructor stub
 
 }
 
-Dama::~Dama()
-{
-	// TODO Auto-generated destructor stub
-}
 
 bool Dama::checaMovimento(Posicao origem, Posicao destino)
 {
@@ -32,7 +27,7 @@ bool Dama::checaMovimento(Posicao origem, Posicao destino)
 					else
 						return false;
 	else if(abs(destino.getColuna() - origem.getColuna()) == abs(destino.getLinha() - origem.getLinha())) //movimento diagonal
-		if(destino.isOcupada() && destino.getCor() != cor)
+		if(destino.isOcupada() && destino.getPca().getCor() != cor)
 						return true;
 					else
 						return false;

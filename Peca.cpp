@@ -1,9 +1,11 @@
-/*
- * Peca.cpp
- *
- *  Created on: 15 de abr de 2019
- *      Author: lucca
- */
-
 #include "Peca.h"
 
+
+Peca::Peca(char c){
+	cor = c;
+	situacao = "Em jogo";
+}
+
+char Peca::getCor(){
+	return cor;
+}

@@ -1,7 +1,7 @@
 #include "Peao.h"
 
-Peao::Peao(char c){
-	cor = c;
+Peao::Peao(char c) : Peca(c){
+
 }
 
 bool Peao::checaMovimento(Posicao origem, Posicao destino){
@@ -19,7 +19,7 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 		if( origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
 		{
 		// para capturar a peca inimiga presisa estar lá
-			if(destino.isOcupada() && destino.getCor() != cor)
+			if(destino.isOcupada() && destino.getPca().getCor() != cor)
 				return true;
 			else
 				return false;

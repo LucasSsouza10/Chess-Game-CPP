@@ -5,11 +5,8 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Peao
+class Peao : virtual public Peca
 {
-private:
-	char cor;
-	std::string situacao; //"capturada" ou "em jogo"
 public:
 	Peao(char);
 	bool checaMovimento(Posicao origem, Posicao destino);

@@ -32,4 +32,6 @@ char Posicao::getCor()
 	return cor;
 }
 
-
+Peca Posicao::getPca(){
+	return pca;
+}

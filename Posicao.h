@@ -17,6 +17,7 @@ public:
 	int getColuna();
 	char getCor();
 	bool isOcupada();
+	Peca getPca();
 
 };
 

@@ -7,30 +7,24 @@
 
 #include "Torre.h"
 
-Torre::Torre()
+Torre::Torre(char c) : Peca(c)
 {
-	// TODO Auto-generated constructor stub
 
 }
 
-Torre::~Torre()
-{
-	// TODO Auto-generated destructor stub
-}
 bool Torre::checaMovimento(Posicao origem, Posicao destino)
 {
 	if(origem.getColuna() == destino.getColuna()) //movimento nas linhas
 		if(destino.isOcupada() && destino.getCor() != cor)
-						return true;
-					else
-						return false;
+			return true;
+		else
+			return false;
 
 	else if(origem.getLinha == destino.getLinha())//movimento nas colunas;
 		if(destino.isOcupada() && destino.getCor() != cor)
-						return true;
-					else
-						return false;
-
+			return true;
+		else
+			return false;
 	else
 		return false;
 

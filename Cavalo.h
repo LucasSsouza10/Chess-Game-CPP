@@ -14,8 +14,6 @@
 
 class Cavalo : virtual public Peca
 {
-private:
-	char cor;
 
 public:
 	Cavalo(char);
