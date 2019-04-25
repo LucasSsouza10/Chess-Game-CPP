@@ -12,7 +12,7 @@ private:
 	Peca *j2;
 
 public:
-	Tabuleiro();	//responsavel pela configuração inicial do tabuleiro
+	Tabuleiro(Peca *p1, Peca *p2);	//responsavel pela configuração inicial do tabuleiro
 	void movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino); // responsavel pela manutenção e checagem do tabuleiro a cada jogada
 	void desenharTabuleiro(); //desenha o tabuleiro na tela
 	static Posicao getPosicao(int linha, int coluna);
