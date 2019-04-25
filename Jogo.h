@@ -15,6 +15,7 @@ private:
 	bool vez; //0 = jogador 1; 1 = jogador 2
 public:
 	Jogo(); //Construtor padr�o
+	Jogo(std::string n1, std::string n2);
 	~Jogo(); //Destrutor
 
 };
