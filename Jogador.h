@@ -9,11 +9,11 @@
 class Jogador {
 	private:
 		const std::string nome;
-		const std::string cor;
+		const char cor;
 		Peca *pecas;
 	public:
-		Jogador(std::string cor,std::string nome,Peca *p);
-
+		Jogador(char cor, std::string nome, Peca *p);
+		char getCor();
 };
 
 #endif /* JOGADOR_H_ */
