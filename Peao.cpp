@@ -40,4 +40,9 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 
 void Peao::desenha(){
 
+		if(cor == "B")
+			return "P";
+		else
+			return "p";
+
 }

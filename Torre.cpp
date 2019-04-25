@@ -30,3 +30,10 @@ bool Torre::checaMovimento(Posicao origem, Posicao destino)
 
 }
 
+char Torre::desenha()
+{
+	if(cor == "B")
+		return "T";
+	else
+		return "t";
+}

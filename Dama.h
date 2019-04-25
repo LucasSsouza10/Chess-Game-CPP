@@ -17,7 +17,7 @@ class Dama : virtual public Peca
 public:
 	Dama(char);
 	bool checaMovimento(Posicao origem, Posicao destino);
-	void desenha();
+	char desenha();
 };
 
 #endif /* DAMA_H_ */

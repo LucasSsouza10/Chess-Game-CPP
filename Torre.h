@@ -17,7 +17,7 @@ class Torre : virtual public Peca
 public:
 	Torre(char);
 	bool checaMovimento(Posicao origem, Posicao destino);
-	void desenha();
+	char desenha();
 };
 
 #endif /* TORRE_H_ */

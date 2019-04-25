@@ -17,7 +17,7 @@ class Bispo : virtual public Peca
 public:
 	Bispo(char);
 	bool checaMovimento(Posicao origem, Posicao destino);
-	void desenha();
+	char desenha();
 };
 
 #endif /* BISPO_H_ */

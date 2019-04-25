@@ -14,6 +14,14 @@ bool Bispo::checaMovimento(Posicao origem, Posicao destino)
 		return false;
 }
 
+char Bispo::desenha()
+{
+	if(cor == "B")
+		return "B";
+	else
+		return "b";
+}
+
 
 
 

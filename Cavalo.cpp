@@ -28,8 +28,14 @@ bool Cavalo::checaMovimento(Posicao origem, Posicao destino)
 	return false;
 }
 
-void Cavalo::desenha()
+char Cavalo::desenha()
 {
+
+		if(cor == "B")
+			return "C";
+		else
+			return "c";
+	}
 }
 
 

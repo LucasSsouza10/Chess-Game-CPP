@@ -19,5 +19,11 @@ else
 	return false;
 }
 
-
+char Rei::desenha()
+{
+	if(cor == "B")
+		return "R";
+	else
+		return "r";
+}
 

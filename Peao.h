@@ -10,7 +10,7 @@ class Peao : virtual public Peca
 public:
 	Peao(char);
 	bool checaMovimento(Posicao origem, Posicao destino);
-	void desenha();
+	char desenha();
 };
 
 #endif /* PEAO_H_ */

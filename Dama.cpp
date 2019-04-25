@@ -34,3 +34,11 @@ bool Dama::checaMovimento(Posicao origem, Posicao destino)
 	else
 		return false;
 }
+
+char Dama::desenha()
+{
+	if(cor == "B")
+		return "D";
+	else
+		return "d";
+}

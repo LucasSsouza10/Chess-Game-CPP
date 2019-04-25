@@ -18,7 +18,7 @@ class Cavalo : virtual public Peca
 public:
 	Cavalo(char);
 	bool checaMovimento(Posicao origem, Posicao destino);
-	void desenha();
+	char desenha();
 };
 
 #endif /* CAVALO_H_ */
