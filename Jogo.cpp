@@ -122,3 +122,11 @@ Jogo::~Jogo()
 
 }
 
+void Jogo::setEstado(int est)
+{
+	estado=est;
+}
+void Jogo::setVez(int v)
+{
+	vez=v;
+}

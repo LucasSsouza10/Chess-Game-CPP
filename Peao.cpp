@@ -38,7 +38,8 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	return true;
 }
 
-void Peao::desenha(){
+char Peao::desenha()
+{
 
 		if(cor == "B")
 			return "P";

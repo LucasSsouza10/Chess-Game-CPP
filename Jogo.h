@@ -5,6 +5,15 @@
 #include "Tabuleiro.h"
 #include "Jogador.h"
 #include "Peca.h"
+#include "Peao.h"
+#include "Rei.h"
+#include "Bispo.h"
+#include "Cavalo.h"
+#include "Dama.h"
+#include "Torre.h"
+
+
+
 
 class Jogo {
 private:
