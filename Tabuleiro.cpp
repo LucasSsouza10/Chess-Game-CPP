@@ -1,42 +1,62 @@
-/*
- * Tabuleiro.cpp
- *
- *  Created on: 15 de abr de 2019
- *      Author: lucca
- */
-
 #include "Tabuleiro.h"
-Tabuleiro::Tabuleiro(Peca *p1, Peca *p2)
+
+using namespace std;
+
+Tabuleiro::Tabuleiro(Peca *p1, Peca *p2) // @suppress("Class members should be properly initialized")
 {
-	int aux=0;// auxiliar na hora de preencher as posicoess
-//0 a 7 primeira fila
-//8 a 15 segunda fila
-	for(int i=0;i<2;i++) //linha
-	{
-		if(i==1)
-			aux=7;
-		for (int j=0;j<8;j++)
-			pos[i][j].setPca(p1[j+aux]) // a intencao aqui e passar o endereco de uma peca vindo do conjunto do jogo;
+	//construindo matriz de posicao
+	pos = new Posicao*[8];
 
+	for (int i = 0; i < 8; ++i) {
+		pos[i] = new Posicao[8];
 	}
-	for(int i=2;i<6;i++) //linha
-		{
-			for (int j=0;j<8;j++)
-				pos[i][j].setPca(NULL) // a intencao aqui e passar o endereco de uma peca vindo do conjunto do jogo;
 
+	//setando Pecas nas posicoes do tabuleiro
+	for (int i = 0; i < 16; ++i) {
+		if(i < 8){
+			pos[0][i].setPca(p1[i]);
+			pos[7][i].setPca(p2[i]);
+		}else{
+			pos[1][i - 8].setPca(p1[i]);
+			pos[8][i - 8].setPca(p2[i]);
 		}
+	}
 
-	for(int i=6;i<8;i++) //linha
-		{
-			if(i==7)
-				aux=7;
-			for (int j=0;j<8;j++)
-				pos[i][j].setPca(p2[j+aux]) // a intencao aqui e passar o endereco de uma peca vindo do conjunto do jogo;
+	char conversor[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
 
+	//Setando linha coluna e cor da posicao
+	for (int i = 0; i < 8; ++i) {
+		for (int j = 0; j < 8; ++j) {
+			pos[i][j].setLinha(i+1);
+			pos[i][j].setColuna(conversor[j]);
+			if((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1))
+				pos[i][j].setCor('B');
+			else
+				pos[i][j].setCor('P');
 		}
+	}
 }
 
 void Tabuleiro::desenharTabuleiro()
 {
+	cout<<"     A     B     C     D     E     F     G     H   "<<endl;
+	for (int i = 7; i <= 0 ; --i) {
+		cout<<"   #################################################"<<endl;
+		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;
+
+		cout<<" " + i+1 + " ";
+		for (int j = 0; j < 8; ++j) {
+			if(pos[i][j].isOcupada())
+				cout<<"#  " + pos[i][j].getPca().desenha() + "  ";
+			else
+				cout<<"#     ";
+		}
+		cout<<endl;
+		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;
+	}
+	cout<<"   #################################################"<<endl;
+}
+
+bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino){
 
 }
