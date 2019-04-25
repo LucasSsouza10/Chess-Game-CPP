@@ -35,3 +35,8 @@ Tabuleiro::Tabuleiro(Peca *p1, Peca *p2)
 
 		}
 }
+
+void Tabuleiro::desenharTabuleiro()
+{
+
+}
