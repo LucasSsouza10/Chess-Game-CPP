@@ -8,11 +8,12 @@
 
 class Jogador {
 	private:
-		std::string nome;
-		std::string cor;
+		const std::string nome;
+		const std::string cor;
 		Peca *pecas;
 	public:
-		Jogador(std::string cor);
+		Jogador(std::string cor,std::string nome,Peca *p);
+
 };
 
 #endif /* JOGADOR_H_ */
