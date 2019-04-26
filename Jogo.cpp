@@ -13,9 +13,8 @@ Jogo::Jogo(string n1, string n2)
 {
 	estado = 0;
 	vez = 0;
-	j1= new Jogador(n1,'B', p1);
-	j2= new Jogador(n2,'P', p2);
-	tab = new Tabuleiro(p1, p2);
+	j1= new Jogador(n1,'B');
+	j2= new Jogador(n2,'P');
 
 	for (int i = 8; i < 16; i++) {
 		p1[i] = new Peao(j1->getCor());
@@ -55,8 +54,12 @@ Jogo::Jogo(string n1, string n2)
 	p1[7]= new Torre(j1->getCor());
 	p2[7]= new Torre(j2->getCor());
 
+	//setando pecas para oo jogadores
+	j1->setPecas(p1);
+	j2->setPecas(p2);
 
-
+	//criando tabuleiro e setando pecas
+	tab = new Tabuleiro(p1, p2);
 
 
 
@@ -66,14 +69,13 @@ Jogo::Jogo()
 {
 	estado = 0;
 	vez = 0;
-	j1= new Jogador("Jogador1",'B', p1);
-	j2= new Jogador("Jogador2",'P', p2);
-	tab = new Tabuleiro(p1, p2);
+
+	j1= new Jogador("Jogador1",'B');
+	j2= new Jogador("Jogador2",'P');
 
 	for (int i = 8; i < 16; i++) {
 		p1[i] = new Peao(j1->getCor());
 		p2[i] = new Peao(j2->getCor());
-
 	}
 
 	//torre a esquerda
@@ -108,6 +110,12 @@ Jogo::Jogo()
 	p1[7]= new Torre(j1->getCor());
 	p2[7]= new Torre(j2->getCor());
 
+	//setando pecas para oo jogadores
+	j1->setPecas(p1);
+	j2->setPecas(p2);
+
+	//criando tabuleiro e setando pecas
+	tab = new Tabuleiro(p1, p2);
 }
 
 Jogo::~Jogo()
@@ -129,4 +137,20 @@ void Jogo::setEstado(int est)
 void Jogo::setVez(int v)
 {
 	vez=v;
+}
+
+void Jogo::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino){
+	tab->movimenta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
+}
+
+void Jogo::desenharTabuleiro(){
+	tab->desenharTabuleiro();
+}
+
+Jogador Jogo::getJogador1(){
+	return *j1;
+}
+
+Jogador Jogo::getJogador2(){
+	return *j2;
 }
