@@ -57,6 +57,21 @@ void Tabuleiro::desenharTabuleiro()
 	cout<<"   #################################################"<<endl;
 }
 
-bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino){
+bool Tabuleiro::movimenta(Posicao origem, Posicao destino){
+	if((origem.getPca()).checaMovimento()){ //movimento valido
+		if(!(destino.isOcupada())){ // se o lugar nao estiver ocupado
+			destino.setPca(origem.getPca());
+			origem.setPca(NULL);
+			return true;
+		}
+		else{
+			if((destino.getPca()).getCor()==(origem.getPca()).getCor()) // esta ocupado com peca de mesma cor;
+				return false;
+			else
+				return true;
+		}
+	}
+
+
 
 }

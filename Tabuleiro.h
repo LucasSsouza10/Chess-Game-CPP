@@ -11,7 +11,7 @@ private:
 
 public:
 	Tabuleiro(Peca *p1, Peca *p2);	//responsavel pela configuração inicial do tabuleiro
-	bool movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino); // responsavel pela manutenção e checagem do tabuleiro a cada jogada
+	bool movimenta(Posicao origem, Posicao destino); // responsavel pela manutenção e checagem do tabuleiro a cada jogada
 	void desenharTabuleiro(); //desenha o tabuleiro na tela
 	Posicao getPosicao(int linha, int coluna);
 
