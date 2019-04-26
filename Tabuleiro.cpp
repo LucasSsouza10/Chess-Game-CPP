@@ -18,7 +18,7 @@ Tabuleiro::Tabuleiro(Peca **p1, Peca **p2) // @suppress("Class members should be
 			pos[7][i].setPca(p2[i]);
 		}else{
 			pos[1][i - 8].setPca(p1[i]);
-			pos[8][i - 8].setPca(p2[i]);
+			pos[6][i - 8].setPca(p2[i]);
 		}
 	}
 
@@ -40,32 +40,33 @@ Tabuleiro::Tabuleiro(Peca **p1, Peca **p2) // @suppress("Class members should be
 void Tabuleiro::desenharTabuleiro()
 {
 	cout<<"     A     B     C     D     E     F     G     H   "<<endl;
-	for (int i = 7; i <= 0 ; --i) {
+	for (int i = 7; i >= 0 ; --i) {
 		cout<<"   #################################################"<<endl;
 		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;
 
 		cout<<" " << i+1 << " ";
 		for (int j = 0; j < 8; ++j) {
-			if(pos[i][j].isOcupada())
-				cout<<"#  " << pos[i][j].getPca()->desenha() << "  ";
-			else
+			if(pos[i][j].isOcupada()){
+				cout<<"#  " << (pos[i][j].getPca())->desenha() << "  ";
+			}else
 				cout<<"#     ";
 		}
-		cout<<endl;
+		cout<<"#"<<endl;
 		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;
 	}
 	cout<<"   #################################################"<<endl;
 }
 
-bool Tabuleiro::movimenta(Posicao origem, Posicao destino){
-	if((origem.getPca())->checaMovimento(origem, destino)){ //movimento valido
-		if(!(destino.isOcupada())){ // se o lugar nao estiver ocupado
-			destino.setPca(origem.getPca());
-			origem.setPca(NULL);
+bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino){
+	if((pos[linhaOrigem][colunaOrigem].getPca())->checaMovimento(pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino])){ //movimento valido
+		cout<< "Checou o movimento"<<endl;
+		if(!(pos[linhaDestino][colunaDestino].isOcupada())){ // se o lugar nao estiver ocupado
+			pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca());
+			pos[linhaOrigem][colunaOrigem].setPca(NULL);
 			return true;
 		}
 		else{
-			if((destino.getPca())->getCor()==(origem.getPca())->getCor()) // esta ocupado com peca de mesma cor;
+			if((pos[linhaDestino][colunaDestino].getPca())->getCor()==(pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
 				return false;
 			else
 				return true;

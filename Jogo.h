@@ -28,6 +28,10 @@ public:
 	~Jogo(); //Destrutor
 	void setEstado(int);
 	void setVez(int);
+	void movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
+	void desenharTabuleiro();
+	Jogador getJogador1();
+	Jogador getJogador2();
 
 };
 

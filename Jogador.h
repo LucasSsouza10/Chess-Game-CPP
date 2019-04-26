@@ -12,8 +12,10 @@ class Jogador {
 		char cor;
 		Peca **pecas;
 	public:
-		Jogador(std::string nome, char cor, Peca **p);
+		Jogador(std::string nome, char cor);
+		void setPecas(Peca**);
 		char getCor();
+		std::string getNome();
 };
 
 #endif /* JOGADOR_H_ */

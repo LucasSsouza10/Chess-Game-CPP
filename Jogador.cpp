@@ -1,10 +1,19 @@
 #include "Jogador.h"
 
-Jogador::Jogador(std::string n, char c, Peca **p) : cor(c), nome(n)
+using namespace std;
+
+Jogador::Jogador(std::string n, char c) : cor(c), nome(n)
 {
-	pecas = p;
 }
 
 char Jogador::getCor(){
 	return cor;
+}
+
+string Jogador::getNome(){
+	return nome;
+}
+
+void Jogador::setPecas(Peca** p){
+	pecas = p;
 }

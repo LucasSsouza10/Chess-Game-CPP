@@ -2,6 +2,8 @@
 #include "Peao.h"
 #include "Torre.h"
 
+using namespace std;
+
 Posicao::Posicao(){
 	linha = 0;
 	coluna = 'N';
@@ -10,7 +12,7 @@ Posicao::Posicao(){
 	ocupada = false;
 }
 
-char Posicao::getLinha(){
+int Posicao::getLinha(){
 	return linha;
 }
 
@@ -27,7 +29,7 @@ char Posicao::getCor()
 	return cor;
 }
 
-Peca* Posicao::getPca(){
+Peca *Posicao::getPca(){
 	return pca;
 }
 
@@ -39,14 +41,14 @@ void Posicao::setPca(Peca *p){
 	else
 		ocupada = false;
 
+
 }
 
 void Posicao::setCor(char c){
 	if(c == 'B' || c == 'P')
 	cor = c;
 }
-void Posicao::setColuna(char c){
-	if(c <= 'H' && c >= 'A')
+void Posicao::setColuna(int c){
 		coluna = c;
 }
 void Posicao::setLinha(int l){

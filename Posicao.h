@@ -11,18 +11,18 @@ private:
 	Peca *pca;
 	char cor;
 	int linha;
-	char coluna;
+	int coluna;
 	bool ocupada;
 public:
 	Posicao();
-	char getLinha();
+	int getLinha();
 	int getColuna();
 	char getCor();
 	bool isOcupada();
-	Peca* getPca();
+	Peca * getPca();
 	void setPca(Peca*);
 	void setCor(char);
-	void setColuna(char);
+	void setColuna(int);
 	void setLinha(int);
 
 };

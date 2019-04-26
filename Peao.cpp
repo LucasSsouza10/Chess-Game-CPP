@@ -1,14 +1,16 @@
 #include "Peao.h"
+using namespace std;
 
 Peao::Peao(char c) : Peca(c){
 
 }
 
 bool Peao::checaMovimento(Posicao origem, Posicao destino){
-	if((cor == 'B' && origem.getLinha() < destino.getLinha()) ||
-		(cor == 'P' && origem.getLinha() > destino.getLinha()))
+	cout<<origem.getLinha()<<endl;
+	cout<<destino.getLinha()<<endl;
+	if((cor == 'B' && origem.getLinha() > destino.getLinha()) ||
+		(cor == 'P' && origem.getLinha() < destino.getLinha()))
 	{
-
 		return false;  // peao não pode movimentar para tras
 	}
 
@@ -40,7 +42,6 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 
 char Peao::desenha()
 {
-
 		if(cor == 'B')
 			return 'P';
 		else
