@@ -10,7 +10,7 @@ private:
 	Posicao **pos;
 
 public:
-	Tabuleiro(Peca *p1, Peca *p2);	//responsavel pela configuração inicial do tabuleiro
+	Tabuleiro(Peca **p1, Peca **p2);	//responsavel pela configuração inicial do tabuleiro
 	bool movimenta(Posicao origem, Posicao destino); // responsavel pela manutenção e checagem do tabuleiro a cada jogada
 	void desenharTabuleiro(); //desenha o tabuleiro na tela
 	Posicao getPosicao(int linha, int coluna);

@@ -10,9 +10,8 @@ protected:
 	char cor;
 	std::string situacao;
 public:
-	Peca();
 	Peca(char);
-	virtual ~Peca(){	}
+	virtual ~Peca();
 	virtual bool checaMovimento(Posicao origem, Posicao destino);
 	virtual char desenha();
 	char getCor();

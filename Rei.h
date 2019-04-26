@@ -6,7 +6,7 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Rei : virtual public Peca
+class Rei : public Peca
 {
 public:
 	Rei(char);

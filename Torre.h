@@ -5,7 +5,7 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Torre : virtual public Peca
+class Torre : public Peca
 {
 public:
 	Torre(char);

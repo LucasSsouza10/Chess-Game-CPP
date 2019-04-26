@@ -1,10 +1,3 @@
-/*
- * Cavalo.h
- *
- *  Created on: 15 de abr de 2019
- *      Author: Will
- */
-
 #ifndef CAVALO_H_
 #define CAVALO_H_
 
@@ -12,8 +5,7 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Cavalo : virtual public Peca
-{
+class Cavalo : public Peca{
 
 public:
 	Cavalo(char);

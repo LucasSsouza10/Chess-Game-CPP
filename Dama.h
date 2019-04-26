@@ -12,7 +12,7 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Dama : virtual public Peca
+class Dama : public Peca
 {
 public:
 	Dama(char);

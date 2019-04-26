@@ -10,9 +10,9 @@ class Jogador {
 	private:
 		std::string nome;
 		char cor;
-		Peca *pecas;
+		Peca **pecas;
 	public:
-		Jogador(std::string nome, char cor, Peca *p);
+		Jogador(std::string nome, char cor, Peca **p);
 		char getCor();
 };
 

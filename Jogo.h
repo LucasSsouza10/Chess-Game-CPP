@@ -19,7 +19,7 @@ class Jogo {
 private:
 	Tabuleiro *tab;
 	Jogador *j1, *j2;
-	Peca *p1, *p2;
+	Peca *p1[16], *p2[16];
 	int estado; //0 = inicio do jogo; 1 = xeque; 2 = xeque-mate
 	int vez; //0 = jogador 1; 1 = jogador 2
 public:

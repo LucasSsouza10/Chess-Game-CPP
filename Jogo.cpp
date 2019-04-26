@@ -7,12 +7,12 @@
 
 #include "Jogo.h"
 
-Jogo::Jogo(std::string n1,std::string n2)
+using namespace std;
+
+Jogo::Jogo(string n1, string n2)
 {
 	estado = 0;
 	vez = 0;
-	p1= new Peca[16];
-	p2= new Peca[16];
 	j1= new Jogador(n1,'B', p1);
 	j2= new Jogador(n2,'P', p2);
 	tab = new Tabuleiro(p1, p2);
@@ -66,8 +66,6 @@ Jogo::Jogo()
 {
 	estado = 0;
 	vez = 0;
-	p1= new Peca[16];
-	p2= new Peca[16];
 	j1= new Jogador("Jogador1",'B', p1);
 	j2= new Jogador("Jogador2",'P', p2);
 	tab = new Tabuleiro(p1, p2);
@@ -114,8 +112,10 @@ Jogo::Jogo()
 
 Jogo::~Jogo()
 {
-	delete [] p1;
-	delete [] p2;
+	for (int i = 0; i < 16; ++i) {
+		delete p1[i];
+		delete p2[i];
+	}
 	delete j1;
 	delete j2;
 
