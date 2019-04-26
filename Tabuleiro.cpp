@@ -14,11 +14,11 @@ Tabuleiro::Tabuleiro(Peca *p1, Peca *p2) // @suppress("Class members should be p
 	//setando Pecas nas posicoes do tabuleiro
 	for (int i = 0; i < 16; ++i) {
 		if(i < 8){
-			pos[0][i].setPca(p1[i]);
-			pos[7][i].setPca(p2[i]);
+			pos[0][i].setPca(&p1[i]);
+			pos[7][i].setPca(&p2[i]);
 		}else{
-			pos[1][i - 8].setPca(p1[i]);
-			pos[8][i - 8].setPca(p2[i]);
+			pos[1][i - 8].setPca(&p1[i]);
+			pos[8][i - 8].setPca(&p2[i]);
 		}
 	}
 
@@ -44,10 +44,10 @@ void Tabuleiro::desenharTabuleiro()
 		cout<<"   #################################################"<<endl;
 		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;
 
-		cout<<" " + i+1 + " ";
+		cout<<" " << i+1 << " ";
 		for (int j = 0; j < 8; ++j) {
 			if(pos[i][j].isOcupada())
-				cout<<"#  " + pos[i][j].getPca().desenha() + "  ";
+				cout<<"#  " << pos[i][j].getPca()->desenha() << "  ";
 			else
 				cout<<"#     ";
 		}
@@ -58,19 +58,20 @@ void Tabuleiro::desenharTabuleiro()
 }
 
 bool Tabuleiro::movimenta(Posicao origem, Posicao destino){
-	if((origem.getPca()).checaMovimento()){ //movimento valido
+	if((origem.getPca())->checaMovimento(origem, destino)){ //movimento valido
 		if(!(destino.isOcupada())){ // se o lugar nao estiver ocupado
 			destino.setPca(origem.getPca());
 			origem.setPca(NULL);
 			return true;
 		}
 		else{
-			if((destino.getPca()).getCor()==(origem.getPca()).getCor()) // esta ocupado com peca de mesma cor;
+			if((destino.getPca())->getCor()==(origem.getPca())->getCor()) // esta ocupado com peca de mesma cor;
 				return false;
 			else
 				return true;
 		}
-	}
+	} else
+		return false;
 
 
 

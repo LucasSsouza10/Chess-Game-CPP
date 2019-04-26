@@ -27,7 +27,7 @@ bool Dama::checaMovimento(Posicao origem, Posicao destino)
 					else
 						return false;
 	else if(abs(destino.getColuna() - origem.getColuna()) == abs(destino.getLinha() - origem.getLinha())) //movimento diagonal
-		if(destino.isOcupada() && destino.getPca().getCor() != cor)
+		if(destino.isOcupada() && destino.getPca()->getCor() != cor)
 						return true;
 					else
 						return false;
@@ -37,8 +37,8 @@ bool Dama::checaMovimento(Posicao origem, Posicao destino)
 
 char Dama::desenha()
 {
-	if(cor == "B")
-		return "D";
+	if(cor == 'B')
+		return 'D';
 	else
-		return "d";
+		return 'd';
 }

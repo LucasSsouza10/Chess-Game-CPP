@@ -27,11 +27,11 @@ char Posicao::getCor()
 	return cor;
 }
 
-Peca Posicao::getPca(){
+Peca* Posicao::getPca(){
 	return pca;
 }
 
-void Posicao::setPca(Peca p){
+void Posicao::setPca(Peca *p){
 	pca = p;
 
 	if(p != NULL)

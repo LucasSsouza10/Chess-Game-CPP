@@ -1,5 +1,9 @@
 #include "Peca.h"
 
+Peca::Peca(){
+	cor = 'N';
+	situacao = "Em jogo";
+}
 
 Peca::Peca(char c){
 	cor = c;

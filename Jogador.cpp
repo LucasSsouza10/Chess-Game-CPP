@@ -1,6 +1,6 @@
 #include "Jogador.h"
 
-Jogador::Jogador(char c, std::string n, Peca *p) : cor(c), nome(n)
+Jogador::Jogador(std::string n, char c, Peca *p) : cor(c), nome(n)
 {
 	pecas = p;
 }

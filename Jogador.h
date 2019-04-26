@@ -4,15 +4,15 @@
 
 #include <iostream>
 
-#include <Peca.h>
+#include "Peca.h"
 
 class Jogador {
 	private:
-		const std::string nome;
-		const char cor;
+		std::string nome;
+		char cor;
 		Peca *pecas;
 	public:
-		Jogador(char cor, std::string nome, Peca *p);
+		Jogador(std::string nome, char cor, Peca *p);
 		char getCor();
 };
 

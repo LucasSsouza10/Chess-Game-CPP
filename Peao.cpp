@@ -19,7 +19,7 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 		if( origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
 		{
 		// para capturar a peca inimiga presisa estar lá
-			if(destino.isOcupada() && destino.getPca().getCor() != cor)
+			if(destino.isOcupada() && destino.getPca()->getCor() != cor)
 				return true;
 			else
 				return false;
@@ -41,9 +41,9 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 char Peao::desenha()
 {
 
-		if(cor == "B")
-			return "P";
+		if(cor == 'B')
+			return 'P';
 		else
-			return "p";
+			return 'p';
 
 }

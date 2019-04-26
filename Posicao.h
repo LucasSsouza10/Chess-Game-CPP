@@ -4,6 +4,7 @@
 
 #include "Peca.h"
 
+class Peca;
 
 class Posicao {
 private:
@@ -18,8 +19,8 @@ public:
 	int getColuna();
 	char getCor();
 	bool isOcupada();
-	Peca getPca();
-	void setPca(Peca);
+	Peca* getPca();
+	void setPca(Peca*);
 	void setCor(char);
 	void setColuna(char);
 	void setLinha(int);

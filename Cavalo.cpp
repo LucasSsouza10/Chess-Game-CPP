@@ -9,19 +9,19 @@ bool Cavalo::checaMovimento(Posicao origem, Posicao destino)
 {
 	if (destino.getColuna() - origem.getColuna() == 2) //Desceu duas linhas
 	{
-		if (origem.getLinha() + 1 == destino.getLinha && !destino.isOcupada() && destino.getCor()!=cor)
+		if (origem.getLinha() + 1 == destino.getLinha() && !destino.isOcupada() && destino.getCor()!=cor)
 			//Uma coluna � esquerda; movimento permitido de posi��o estiver livre ou se houver uma peca inimiga
 			return true;
-		else if (origem.getLinha() - 1 == destino.getLinha && !destino.isOcupada() && destino.getCor()!=cor)
+		else if (origem.getLinha() - 1 == destino.getLinha() && !destino.isOcupada() && destino.getCor()!=cor)
 			//Uma coluna � direita; movimento permitido de posi��o estiver livre ou se houver uma peca inimiga
 			return true;
 	}
-	else if (destino.getColuna() - origem.getColuna == -2) ///Subiu duas linhas
+	else if (destino.getColuna() - origem.getColuna() == -2) ///Subiu duas linhas
 	{
-		if (origem.getLinha() + 1 == destino.getLinha && !destino.isOcupada() && destino.getCor()!=cor)
+		if (origem.getLinha() + 1 == destino.getLinha() && !destino.isOcupada() && destino.getCor()!=cor)
 			//Uma coluna � esquerda; movimento permitido de posi��o estiver livre ou se houver uma peca inimiga
 			return true;
-		else if (origem.getLinha() - 1 == destino.getLinha && !destino.isOcupada() && destino.getCor()!=cor)
+		else if (origem.getLinha() - 1 == destino.getLinha() && !destino.isOcupada() && destino.getCor()!=cor)
 			//Uma coluna � direita; movimento permitido de posi��o estiver livre ou se houver uma peca inimiga
 			return true;
 	}
@@ -31,11 +31,10 @@ bool Cavalo::checaMovimento(Posicao origem, Posicao destino)
 char Cavalo::desenha()
 {
 
-		if(cor == "B")
-			return "C";
+		if(cor == 'B')
+			return 'C';
 		else
-			return "c";
-	}
+			return 'c';
 }
 
 

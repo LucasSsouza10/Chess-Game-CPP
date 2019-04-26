@@ -13,8 +13,8 @@ Jogo::Jogo(std::string n1,std::string n2)
 	vez = 0;
 	p1= new Peca[16];
 	p2= new Peca[16];
-	j1= new Jogador(n1,"B", p1);
-	j2= new Jogador(n2,"P", p2);
+	j1= new Jogador(n1,'B', p1);
+	j2= new Jogador(n2,'P', p2);
 	tab = new Tabuleiro(p1, p2);
 
 	for (int i = 8; i < 16; i++) {
@@ -68,8 +68,8 @@ Jogo::Jogo()
 	vez = 0;
 	p1= new Peca[16];
 	p2= new Peca[16];
-	j1= new Jogador("Jogador1","B", p1);
-	j2= new Jogador("Jogador2","P", p2);
+	j1= new Jogador("Jogador1",'B', p1);
+	j2= new Jogador("Jogador2",'P', p2);
 	tab = new Tabuleiro(p1, p2);
 
 	for (int i = 8; i < 16; i++) {

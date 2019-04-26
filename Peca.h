@@ -2,16 +2,19 @@
 #define PECA_H_
 
 #include <iostream>
+#include "Posicao.h"
+class Posicao;
 
 class Peca {
 protected:
 	char cor;
 	std::string situacao;
 public:
+	Peca();
 	Peca(char);
 	virtual ~Peca(){	}
-	virtual bool checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
-	virtual void desenha();
+	virtual bool checaMovimento(Posicao origem, Posicao destino);
+	virtual char desenha();
 	char getCor();
 };
 
