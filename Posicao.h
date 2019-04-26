@@ -7,17 +7,22 @@
 
 class Posicao {
 private:
-	Peca pca;
+	Peca *pca;
 	char cor;
-	char linha;
-	int coluna;
+	int linha;
+	char coluna;
+	bool ocupada;
 public:
-	Posicao(char, int, char);
+	Posicao();
 	char getLinha();
 	int getColuna();
 	char getCor();
 	bool isOcupada();
 	Peca getPca();
+	void setPca(Peca);
+	void setCor(char);
+	void setColuna(char);
+	void setLinha(int);
 
 };
 

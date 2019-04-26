@@ -2,14 +2,12 @@
 #include "Peao.h"
 #include "Torre.h"
 
-Posicao::Posicao(char col, int lin, char c){
-	coluna = col;
-	linha = lin;
-	cor = c;
-	if(lin == 2 || lin == 7)
-		pca = new Peao(c);
-	else if((lin == 1 && col == 'A') || (lin = 8 && col == 'H'))
-		pca = new Torre(c);
+Posicao::Posicao(){
+	linha = 0;
+	coluna = 'N';
+	cor = 'N';
+	pca = NULL;
+	ocupada = false;
 }
 
 char Posicao::getLinha(){
@@ -21,10 +19,7 @@ int Posicao::getColuna(){
 }
 
 bool Posicao::isOcupada() {
-	if (pca)
-		return true;
-	else
-		return false;
+	return ocupada;
 }
 
 char Posicao::getCor()
@@ -35,3 +30,28 @@ char Posicao::getCor()
 Peca Posicao::getPca(){
 	return pca;
 }
+
+void Posicao::setPca(Peca p){
+	pca = p;
+
+	if(p != NULL)
+		ocupada = true;
+	else
+		ocupada = false;
+
+}
+
+void Posicao::setCor(char c){
+	if(c == 'B' || c == 'P')
+	cor = c;
+}
+void Posicao::setColuna(char c){
+	if(c <= 'H' && c >= 'A')
+		coluna = c;
+}
+void Posicao::setLinha(int l){
+	if(l <= 8 && l >= 1)
+		linha = l;
+
+}
+
