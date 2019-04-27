@@ -6,6 +6,7 @@
  */
 
 #include "Torre.h"
+using namespace std;
 
 Torre::Torre(char c) : Peca(c)
 {
@@ -14,17 +15,12 @@ Torre::Torre(char c) : Peca(c)
 
 bool Torre::checaMovimento(Posicao origem, Posicao destino)
 {
+
 	if(origem.getColuna() == destino.getColuna()) //movimento nas linhas
-		if(destino.isOcupada() && destino.getCor() != cor)
-			return true;
-		else
-			return false;
+		return true;
 
 	else if(origem.getLinha() == destino.getLinha())//movimento nas colunas;
-		if(destino.isOcupada() && destino.getCor() != cor)
-			return true;
-		else
-			return false;
+		return true;
 	else
 		return false;
 

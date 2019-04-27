@@ -1,5 +1,5 @@
 #include "Bispo.h"
-
+#include <math.h>
 
 Bispo::Bispo(char c) : Peca(c)
 {
@@ -8,7 +8,7 @@ Bispo::Bispo(char c) : Peca(c)
 
 bool Bispo::checaMovimento(Posicao origem, Posicao destino)
 {
-	if (destino.getLinha() - origem.getLinha() == destino.getColuna() - origem.getColuna())
+	if (abs(destino.getLinha() - origem.getLinha()) == abs(destino.getColuna() - origem.getColuna()))
 		return true;
 	else
 		return false;

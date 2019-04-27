@@ -5,9 +5,8 @@
 using namespace std;
 
 Posicao::Posicao(){
-	linha = 0;
-	coluna = 'N';
-	cor = 'N';
+
+
 	pca = NULL;
 	ocupada = false;
 }
@@ -49,6 +48,7 @@ void Posicao::setCor(char c){
 	cor = c;
 }
 void Posicao::setColuna(int c){
+	if(c <= 8 && c >= 1)
 		coluna = c;
 }
 void Posicao::setLinha(int l){

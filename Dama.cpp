@@ -8,36 +8,29 @@
 #include "Dama.h"
 #include <math.h>
 
-Dama::Dama(char c) : Peca(c)
-{
+Dama::Dama(char c) :
+		Peca(c) {
 
 }
 
+bool Dama::checaMovimento(Posicao origem, Posicao destino) {
+	if (destino.getColuna() == origem.getColuna()) // movimento na linha
+		return true;
 
-bool Dama::checaMovimento(Posicao origem, Posicao destino)
-{
-	if(destino.getColuna() == origem.getColuna()) // movimento na linha
-		if(destino.isOcupada() && destino.getCor() != cor)
-						return true;
-					else
-						return false;
-	else if(destino.getLinha() == origem.getLinha()) //movimento na coluna
-		if(destino.isOcupada() && destino.getCor() != cor)
-						return true;
-					else
-						return false;
-	else if(abs(destino.getColuna() - origem.getColuna()) == abs(destino.getLinha() - origem.getLinha())) //movimento diagonal
-		if(destino.isOcupada() && destino.getPca()->getCor() != cor)
-						return true;
-					else
-						return false;
+	else if (destino.getLinha() == origem.getLinha()) //movimento na coluna
+
+		return true;
+
+	else if (abs(destino.getColuna() - origem.getColuna())
+			== abs(destino.getLinha() - origem.getLinha())) //movimento diagonal
+		return true;
+
 	else
 		return false;
 }
 
-char Dama::desenha()
-{
-	if(cor == 'B')
+char Dama::desenha() {
+	if (cor == 'B')
 		return 'D';
 	else
 		return 'd';
