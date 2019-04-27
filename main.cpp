@@ -101,5 +101,109 @@ int main() {
 	destino.setColuna(2);
 	cout << "movimento valido? " << r1.checaMovimento(origem, destino) << endl;
 
+	//Teste exaustivo do cavalo
+	//primeiro IF -- Descer Duas linhas
+	Cavalo c2('B');
+	// Virando a esquerda
+	cout << "primeiro IF -- Descer Duas linhas -- Virando a esquerda" << endl;
+	origem.setLinha(4);
+	origem.setColuna(4);
+	destino.setLinha(2);
+	destino.setColuna(3);
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setColuna(2);
+	cout << "primeiro IF -- Descer Duas linhas -- Virando a esquerda duas casas  " << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	cout << "primeiro IF -- Descer Duas linhas -- Virando a direita  " << endl;
+	destino.setColuna(5);
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	cout << "primeiro IF -- Descer Duas linhas -- Virando a duas casas direita  " << endl;
+	destino.setColuna(6);
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(6);
+	destino.setColuna(3);
+	cout << "subir 2 linhas e virar a esquerda" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setColuna(5);
+	cout << "subir 2 linhas e virar a direita" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(5);
+	destino.setColuna(2);
+	cout << "andar duas casas a esquerda e subir uma casa" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setColuna(6);
+	cout << "andar duas casas a direita e subir uma casa" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(3);
+	destino.setColuna(2);
+	cout << "andar duas casas a direita e descer uma casa" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+	destino.setColuna(6);
+	cout << "andar duas casas a esquerda e descer uma casa" << endl;
+	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
+
+	Dama d2('P');
+	origem.setLinha(4);
+	origem.setColuna(4);
+	destino.setLinha(6);
+	destino.setColuna(4);
+	cout << "Dama movendo-se na vertical" << endl;
+	cout << "movimento valido? " << d2.checaMovimento(origem, destino) << endl;
+	destino.setColuna(6);
+	cout << "Dama movendo-se na diagonal" << endl;
+	cout << "movimento valido? " << d2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(4);
+	cout << "Dama movendo-se na Horizontal" << endl;
+	cout << "movimento valido? " << d2.checaMovimento(origem, destino) << endl;
+
+	Rei r2('B');
+	origem.setLinha(4);
+	origem.setColuna(4);
+	destino.setLinha(4);
+	destino.setColuna(5);
+	cout << "Rei movendo-se na Horizontal" << endl;
+	cout << "movimento valido? " << r2.checaMovimento(origem, destino) << endl;
+
+	Torre t2('P');
+	origem.setLinha(4);
+	origem.setColuna(4);
+	destino.setLinha(4);
+	destino.setColuna(8);
+	cout << "Torre movendo-se na Horizontal" << endl;
+	cout << "movimento valido? " << t2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(4);
+	cout << "Torre movendo-se na Vertical" << endl;
+	cout << "movimento valido? " << t2.checaMovimento(origem, destino) << endl;
+
+	Peao p2('P');
+	origem.setLinha(7);
+	origem.setColuna(2);
+	destino.setLinha(5);
+	destino.setColuna(2);
+	cout <<"Peao preto na posicao inicial movendo-se  duas linhas" << endl;
+	cout << "movimento valido? " << p2.checaMovimento(origem, destino) << endl;
+	destino.setLinha(6);
+	cout <<"Peao preto na posicao inicial movendo-se  uma linha" << endl;
+	cout << "movimento valido? " << p2.checaMovimento(origem, destino) << endl;
+	cout <<"Peao preto tentando mover-se para tras" << endl;
+	destino.setLinha(8);
+	cout << "movimento valido? " << p2.checaMovimento(origem, destino) << endl;
+
+	Peao p3('B');
+	origem.setLinha(2);
+	origem.setColuna(2);
+	destino.setLinha(4);
+	destino.setColuna(2);
+	cout << "Peao branco na posicao inicial movendo-se  duas linhas" << endl;
+	cout << "movimento valido? " << p3.checaMovimento(origem, destino) << endl;
+	destino.setLinha(3);
+	cout << "movimento valido? " << p3.checaMovimento(origem, destino) << endl;
+	cout << "Peao branco na posicao inicial movendo-se  uma linha" << endl;
+	cout << "movimento valido? " << p3.checaMovimento(origem, destino) << endl;
+	cout <<"Peao branco tentando mover-se para tras" << endl;
+	destino.setLinha(1);
+	cout << "movimento valido? " << p2.checaMovimento(origem, destino) << endl;
+
+
 }
 
