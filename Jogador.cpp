@@ -2,8 +2,10 @@
 
 using namespace std;
 
-Jogador::Jogador(std::string n, char c) : cor(c), nome(n)
-{
+Jogador::Jogador(std::string n, char c){
+	cor = c;
+	nome = n;
+	quantPecas = 0;
 }
 
 char Jogador::getCor(){
@@ -14,6 +16,7 @@ string Jogador::getNome(){
 	return nome;
 }
 
-void Jogador::setPecas(Peca** p){
-	pecas = p;
+void Jogador::addPecas(Peca *p){
+	pecas[quantPecas] = p;
+	quantPecas++;
 }

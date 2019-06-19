@@ -19,9 +19,10 @@ class Jogo {
 private:
 	Tabuleiro *tab;
 	Jogador *j1, *j2;
-	Peca *p1[16], *p2[16];
+	Peca *p[32];
 	int estado; //0 = inicio do jogo; 1 = xeque; 2 = xeque-mate
 	int vez; //0 = jogador 1; 1 = jogador 2
+	void criarPecas();
 public:
 	Jogo(); //Construtor padr�o
 	Jogo(std::string n1, std::string n2);

@@ -10,10 +10,11 @@ class Jogador {
 	private:
 		std::string nome;
 		char cor;
-		Peca **pecas;
+		Peca *pecas[16];
+		int quantPecas;
 	public:
 		Jogador(std::string nome, char cor);
-		void setPecas(Peca**);
+		void addPecas(Peca*);
 		char getCor();
 		std::string getNome();
 };

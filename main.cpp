@@ -88,7 +88,7 @@ int main() {
 	destino.setColuna(2);
 	cout << "movimento valido? " << d1.checaMovimento(origem, destino) << endl;
 
-	//Teste 7 Checagem Movimento Rei
+	//Teste 8 Checagem Movimento Rei
 	cout << "Inicio teste 8" << endl;
 
 	origem.setLinha(5);
@@ -142,6 +142,7 @@ int main() {
 	cout << "andar duas casas a esquerda e descer uma casa" << endl;
 	cout << "movimento valido? " << c2.checaMovimento(origem, destino) << endl;
 
+	//Teste exaustivo do Dama
 	Dama d2('P');
 	origem.setLinha(4);
 	origem.setColuna(4);
@@ -156,6 +157,7 @@ int main() {
 	cout << "Dama movendo-se na Horizontal" << endl;
 	cout << "movimento valido? " << d2.checaMovimento(origem, destino) << endl;
 
+	//Teste exaustivo do rei
 	Rei r2('B');
 	origem.setLinha(4);
 	origem.setColuna(4);
@@ -164,6 +166,7 @@ int main() {
 	cout << "Rei movendo-se na Horizontal" << endl;
 	cout << "movimento valido? " << r2.checaMovimento(origem, destino) << endl;
 
+	//Teste exaustivo da torre
 	Torre t2('P');
 	origem.setLinha(4);
 	origem.setColuna(4);
@@ -175,6 +178,7 @@ int main() {
 	cout << "Torre movendo-se na Vertical" << endl;
 	cout << "movimento valido? " << t2.checaMovimento(origem, destino) << endl;
 
+	//Teste exaustivo do peao
 	Peao p2('P');
 	origem.setLinha(7);
 	origem.setColuna(2);

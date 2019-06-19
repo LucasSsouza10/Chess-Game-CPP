@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Tabuleiro::Tabuleiro(Peca **p1, Peca **p2) // @suppress("Class members should be properly initialized")
+Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly initialized")
 {
 	//construindo matriz de posicao
 	pos = new Posicao*[8];
@@ -14,11 +14,11 @@ Tabuleiro::Tabuleiro(Peca **p1, Peca **p2) // @suppress("Class members should be
 	//setando Pecas nas posicoes do tabuleiro
 	for (int i = 0; i < 16; ++i) {
 		if(i < 8){
-			pos[0][i].setPca(p1[i]);
-			pos[7][i].setPca(p2[i]);
+			pos[0][i].setPca(p[i]);
+			pos[7][i].setPca(p[i + 16]);
 		}else{
-			pos[1][i - 8].setPca(p1[i]);
-			pos[6][i - 8].setPca(p2[i]);
+			pos[1][i - 8].setPca(p[i]);
+			pos[6][i - 8].setPca(p[i + 16]);
 		}
 	}
 
@@ -48,8 +48,9 @@ void Tabuleiro::desenharTabuleiro()
 		for (int j = 0; j < 8; ++j) {
 			if(pos[i][j].isOcupada()){
 				cout<<"#  " << (pos[i][j].getPca())->desenha() << "  ";
-			}else
+			}else{
 				cout<<"#     ";
+			}
 		}
 		cout<<"#"<<endl;
 		cout<<"   #     #     #     #     #     #     #     #     #"<<endl;

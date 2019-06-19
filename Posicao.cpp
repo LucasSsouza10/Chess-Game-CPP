@@ -5,8 +5,6 @@
 using namespace std;
 
 Posicao::Posicao(){
-
-
 	pca = NULL;
 	ocupada = false;
 }
