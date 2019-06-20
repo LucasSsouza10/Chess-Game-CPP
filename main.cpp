@@ -21,9 +21,9 @@ int main() {
 		op = toupper(op);
 	}
 
-	if (op == 'S') {
+	if (op == 'S')
 		jogo.carregar(); //carrega jogo salvo
-	} else if (op != 'N') {
+	else {
 		jogo.limparSalvo(); //começa um novo jogo
 	}
 
