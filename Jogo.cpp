@@ -181,8 +181,24 @@ bool Jogo::mover(string m) {
 }
 
 void Jogo::salvarEstado(string m) {
-	fstream out("JogoSalvo.txt");
-	out.seekp(0, out.end);
+	ofstream out("JogoSalvo.txt", ios::app);
 	out << m << "\n";
 	out.close();
+}
+
+void Jogo::carregar(){
+	ifstream read("JogoSalvo.txt");
+	string move;
+	while(!read.eof()){
+		getline(read, move);
+		if(validarFormato(move))
+			mover(move);
+	}
+	read.close();
+}
+
+void Jogo::limparSalvo(){
+	ofstream ofs;
+	ofs.open("JogoSalvo.txt", ofstream::out | ofstream::trunc);
+	ofs.close();
 }

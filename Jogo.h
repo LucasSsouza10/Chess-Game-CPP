@@ -32,6 +32,8 @@ public:
 	bool validarFormato(std::string);
 	bool mover(std::string);
 	void salvarEstado(std::string);
+	void carregar();
+	void limparSalvo();
 };
 
 #endif /* JOGO_H_ */
