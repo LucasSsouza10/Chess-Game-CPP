@@ -177,7 +177,8 @@ bool Jogo::mover(string m) {
 	destinoLinha = m[7] - '1';
 	destinoColuna = toupper(m[6]) - 'A';
 
-	return tab->movimenta(origemLinha, origemColuna, destinoLinha, destinoColuna);
+	return tab->movimenta(origemLinha, origemColuna, destinoLinha,
+			destinoColuna);
 }
 
 void Jogo::salvarEstado(string m) {
@@ -186,18 +187,24 @@ void Jogo::salvarEstado(string m) {
 	out.close();
 }
 
-void Jogo::carregar(){
+void Jogo::carregar() {
 	ifstream read("JogoSalvo.txt");
 	string move;
-	while(!read.eof()){
+	while (!read.eof()) {
 		getline(read, move);
-		if(validarFormato(move))
+		if (validarFormato(move)) {
+			if (vez == 1) // para alterar a vez conforme é feito os movimentos primeiro a jogar 1
+				vez = 2;
+			else
+				vez = 1;
+
 			mover(move);
+		}
 	}
 	read.close();
 }
 
-void Jogo::limparSalvo(){
+void Jogo::limparSalvo() {
 	ofstream ofs;
 	ofs.open("JogoSalvo.txt", ofstream::out | ofstream::trunc);
 	ofs.close();
