@@ -22,13 +22,11 @@ Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly in
 		}
 	}
 
-	char conversor[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-
 	//Setando linha coluna e cor da posicao
 	for (int i = 0; i < 8; ++i) {
 		for (int j = 0; j < 8; ++j) {
 			pos[i][j].setLinha(i+1);
-			pos[i][j].setColuna(conversor[j]);
+			pos[i][j].setColuna(j + 1);
 			if((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1))
 				pos[i][j].setCor('B');
 			else
@@ -59,7 +57,9 @@ void Tabuleiro::desenharTabuleiro()
 }
 
 bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino){
-	if((pos[linhaOrigem][colunaOrigem].getPca())->checaMovimento(pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino])){ //movimento valido
+	bool mov = pos[linhaOrigem][colunaOrigem].getPca()->checaMovimento(pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino]);
+	cout << mov << endl;
+	if(mov){ //movimento valido
 		cout<< "Checou o movimento"<<endl;
 		if(!(pos[linhaDestino][colunaDestino].isOcupada())){ // se o lugar nao estiver ocupado
 			pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca());

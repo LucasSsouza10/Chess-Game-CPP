@@ -180,6 +180,9 @@ bool Jogo::mover(string m) {
 	origemColuna = toupper(m[0]) - 'A';
 	destinoLinha = m[7] - '1';
 	destinoColuna = toupper(m[6]) - 'A';
-
-	return tab->movimenta(origemLinha, origemColuna, destinoLinha,destinoColuna);
+	cout<< "OrigemLinha: " << origemLinha << " OrigemColuna: " << origemColuna << endl;
+	cout<< "DestinoLinhas: " << destinoLinha << " DestinoColuna: " << destinoColuna << endl;
+	bool mov = tab->movimenta(origemLinha, origemColuna, destinoLinha,destinoColuna);
+	cout<< mov << endl;
+	return mov;
 }
