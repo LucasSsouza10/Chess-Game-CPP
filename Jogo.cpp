@@ -115,9 +115,17 @@ void Jogo::playGame() {
 		cout << "Jogador " << vez << " por favor entre com seu movimento: ";
 		getline(cin, move);
 
+		if (move.compare("0") == 0) { //condição para interromper o jogo
+			return;
+		}
+
 		while (validarFormato(move) == false) {
 			cout << "Formato invalido. Tente novamente: ";
 			getline(cin, move);
+
+			if (move.compare("0") == 0) { //condição para interromper o jogo
+				return;
+			}
 		}
 
 		while (mover(move) == false) {
@@ -125,9 +133,17 @@ void Jogo::playGame() {
 			cout << "Movimento invalido. Tente novamente: ";
 			getline(cin, move);
 
+			if (move.compare("0") == 0) { //condição para interromper o jogo
+				return;
+			}
+
 			while (validarFormato(move) == false) {
 				cout << "Formato invalido. Tente novamente: ";
 				getline(cin, move);
+
+				if (move.compare("0") == 0) { //condição para interromper o jogo
+					return;
+				}
 			}
 		}
 

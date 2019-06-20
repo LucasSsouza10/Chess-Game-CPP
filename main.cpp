@@ -29,5 +29,6 @@ int main() {
 
 	cin.ignore();
 	jogo.playGame();
+	cout << "Jogo finalizado" << endl;
 }
 
