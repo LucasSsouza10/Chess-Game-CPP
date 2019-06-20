@@ -31,9 +31,8 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 		//a não ser que seja seu primeiro movimento
 		if((origem.getLinha() == 2 && cor == 'B') || (origem.getLinha() == 7 && cor == 'P'))
 			return true;
-		else{
+		else
 			return false;
-		}
 	}
 
 	return true;
