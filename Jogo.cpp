@@ -1,10 +1,4 @@
-/*
- * Jogo.cpp
- *
- *  Created on: 15 de abr de 2019
- *      Author: lucca
- */
-
+#include <fstream>
 #include "Jogo.h"
 
 using namespace std;
@@ -136,6 +130,8 @@ void Jogo::playGame() {
 				getline(cin, move);
 			}
 		}
+
+		salvarEstado(move);
 	}
 }
 
@@ -180,9 +176,19 @@ bool Jogo::mover(string m) {
 	origemColuna = toupper(m[0]) - 'A';
 	destinoLinha = m[7] - '1';
 	destinoColuna = toupper(m[6]) - 'A';
-	cout<< "OrigemLinha: " << origemLinha << " OrigemColuna: " << origemColuna << endl;
-	cout<< "DestinoLinhas: " << destinoLinha << " DestinoColuna: " << destinoColuna << endl;
-	bool mov = tab->movimenta(origemLinha, origemColuna, destinoLinha,destinoColuna);
-	cout<< mov << endl;
+	cout << "OrigemLinha: " << origemLinha << " OrigemColuna: " << origemColuna
+			<< endl;
+	cout << "DestinoLinhas: " << destinoLinha << " DestinoColuna: "
+			<< destinoColuna << endl;
+	bool mov = tab->movimenta(origemLinha, origemColuna, destinoLinha,
+			destinoColuna);
+	cout << mov << endl;
 	return mov;
+}
+
+void Jogo::salvarEstado(string m) {
+	fstream out("JogoSalvo.txt");
+	out.seekp(0, out.end);
+	out << m << "\n";
+	out.close();
 }

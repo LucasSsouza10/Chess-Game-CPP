@@ -1,4 +1,3 @@
-
 #ifndef JOGO_H_
 #define JOGO_H_
 
@@ -32,6 +31,7 @@ public:
 	void playGame();
 	bool validarFormato(std::string);
 	bool mover(std::string);
+	void salvarEstado(std::string);
 };
 
 #endif /* JOGO_H_ */
