@@ -29,11 +29,9 @@ public:
 	~Jogo(); //Destrutor
 	void setEstado(int);
 	void setVez(int);
-	void movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
-	void desenharTabuleiro();
-	Jogador getJogador1();
-	Jogador getJogador2();
-
+	void playGame();
+	bool validarFormato(std::string);
+	bool mover(std::string);
 };
 
 #endif /* JOGO_H_ */

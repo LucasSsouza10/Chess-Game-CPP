@@ -11,7 +11,7 @@ using namespace std;
 
 Jogo::Jogo(string n1, string n2) {
 	estado = 0;
-	vez = 0;
+	vez = 2; //2 para quando iniciar o jogo comecar pelo jogador 1
 	j1 = new Jogador(n1, 'B');
 	j2 = new Jogador(n2, 'P');
 
@@ -35,7 +35,7 @@ Jogo::Jogo() {
 	j1 = new Jogador("Jogador1", 'B');
 	j2 = new Jogador("Jogador2", 'P');
 	//criando pecas
-		criarPecas();
+	criarPecas();
 	//setando pecas para os jogadores
 	for (int i = 0; i < 16; ++i) {
 		j1->addPecas(p[i]);
@@ -103,19 +103,83 @@ void Jogo::setVez(int v) {
 	vez = v;
 }
 
-void Jogo::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
-		int colunaDestino) {
-	tab->movimenta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
+void Jogo::playGame() {
+	string move;
+
+	while (true) {
+
+		//depois de cada movimento trocamos a vez de jogar
+		if (vez == 1)
+			vez = 2;
+		else
+			vez = 1;
+
+		//Mostra o tabuleiro
+		tab->desenharTabuleiro();
+
+		//Pedido de entrada de movimento
+		cout << "Jogador " << vez << " por favor entre com seu movimento: ";
+		getline(cin, move);
+
+		while (validarFormato(move) == false) {
+			cout << "Formato invalido. Tente novamente: ";
+			getline(cin, move);
+		}
+
+		while (mover(move) == false) {
+
+			cout << "Movimento invalido. Tente novamente: ";
+			getline(cin, move);
+
+			while (validarFormato(move) == false) {
+				cout << "Formato invalido. Tente novamente: ";
+				getline(cin, move);
+			}
+		}
+	}
 }
 
-void Jogo::desenharTabuleiro() {
-	tab->desenharTabuleiro();
+bool Jogo::validarFormato(string m) {
+
+	//Um movimento valido tem 8 caracteres
+	if (m.length() != 8) {
+		return false;
+	}
+
+	//verifica se a linha da entrada eh valido com o tamanho do tabuleiro para origem
+	if (toupper(m[0]) <= 'A' && toupper(m[0]) >= 'H') {
+		return false;
+	}
+
+	//verifica se a coluna é valida para origem
+	if (m[1] <= '1' && m[1] >= '8') {
+		return false;
+	}
+
+	if (m[3] != '-' || m[4] != '>') {
+		return false;
+	}
+
+	//verifica se eh uma linha valida para destino
+	if (toupper(m[6]) <= 'A' && toupper(m[6]) >= 'H') {
+		return false;
+	}
+
+	//verifica se eh uma coluna valida para destino
+	if (m[7] <= '1' && m[7] >= '8') {
+		return false;
+	}
+
+	else
+		return true;
 }
 
-Jogador Jogo::getJogador1() {
-	return *j1;
-}
+bool Jogo::mover(string m) {
+	int origemLinha, origemColuna, destinoLinha, destinoColuna;
+	origemLinha = m[1] - '1'; //para transformar o caractere em um int correspondente
+	origemColuna = toupper(m[0]) - 'A';
+	destinoLinha = m[7] - '1';
+	destinoColuna = toupper(m[6]) - 'A';
 
-Jogador Jogo::getJogador2() {
-	return *j2;
+	return tab->movimenta(origemLinha, origemColuna, destinoLinha,destinoColuna);
 }
