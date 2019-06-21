@@ -16,6 +16,8 @@ public:
 	virtual char desenha();
 	char getCor();
 	void setSituacao(); //Troca situção para capturada
+	bool operator==(Peca&);
+
 };
 
 #endif /* PECA_H_ */

@@ -32,5 +32,16 @@ char Peca::desenha(){
 //Troca situção para capturada
 void Peca::setSituacao(){
 	situacao = 0;
+
+
+}
+
+bool Peca::operator==(Peca &pecas)
+{
+	if(this->desenha()==pecas.desenha())
+		return true;
+	else return false;
+
+
 }
 
