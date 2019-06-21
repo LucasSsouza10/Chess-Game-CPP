@@ -9,7 +9,7 @@ class Tabuleiro {
 private:
 	Posicao **pos;
 	bool checaCaminho(int, int, int, int);
-	bool captura(int, int, int, int);
+	void captura(int, int);
 
 public:
 	Tabuleiro(Peca **p);	//responsavel pela configuração inicial do tabuleiro

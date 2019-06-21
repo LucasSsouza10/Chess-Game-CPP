@@ -67,7 +67,6 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, i
 	if (mov) { //movimento valido
 		cout << "Checou o movimento" << endl;
 		if (!(pos[linhaDestino][colunaDestino].isOcupada()))
-
 		{ // se o lugar nao estiver ocupado
 			if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) { // checa as casas do movimento
 				pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
@@ -75,12 +74,13 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, i
 				return true;
 			} else
 				return false;
-		}
-		else { //Lugar ocupado
+		}else { //Lugar ocupado
 			if ((pos[linhaDestino][colunaDestino].getPca())->getCor() == (pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
 				return false;
 			else if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)){//está ocupado com peça de outra cor
-                captura(linhaDestino, colunaDestino, linhaOrigem, colunaOrigem);
+                captura(linhaDestino, colunaDestino);
+                pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca());
+                pos[linhaOrigem][colunaOrigem].setPca(NULL);
 				return true;
 			}
 		}
@@ -317,11 +317,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem, int linhaDestino
 return false;
 } // fim da funçao
 
-bool Tabuleiro::captura(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-    Peca *capturada = pos[linhaDestino][colunaDestino].getPca();
-    //strcpy(capturada->situacao, "capturada"); //situacao é protected!
-    pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
-	pos[linhaOrigem][colunaOrigem].setPca(NULL); //Seta a posição origem como vaga
-
-    return true;
+void Tabuleiro::captura(int linha, int coluna) {
+    Peca *capturada = pos[linha][coluna].getPca();
+    capturada->setSituacao();
 }

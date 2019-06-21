@@ -8,13 +8,14 @@ class Posicao;
 class Peca {
 protected:
 	char cor;
-	std::string situacao; //Em jogo ou capturada
+	int situacao; // 1 Em jogo ou 0 capturada
 public:
 	Peca(char);
 	virtual ~Peca();
 	virtual bool checaMovimento(Posicao origem, Posicao destino);
 	virtual char desenha();
 	char getCor();
+	void setSituacao(); //Troca situção para capturada
 };
 
 #endif /* PECA_H_ */
