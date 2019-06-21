@@ -134,6 +134,7 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 					}
 					return true;
 				} else { //movendo-se para a esquerda
+					aux=1;
 					while (colunaOrigem - (aux) != colunaDestino) {
 						if (pos[linhaOrigem][colunaOrigem - aux].isOcupada())
 							return false;
@@ -151,6 +152,7 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 				}
 				return true;
 			} else { //movendo-se de baixo para cima
+				aux=1;
 				while (linhaOrigem - aux != linhaDestino) {
 					if (pos[linhaOrigem - aux][colunaOrigem].isOcupada())
 						return false;
@@ -212,5 +214,100 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 			}
 
 		} //fim bispo
-	}
-}
+		  //Checagem de movimento da dama
+		else if (tipoPeca == 'D' || tipoPeca == 'd') {
+			if (linhaOrigem == linhaDestino) {
+				if (colunaDestino > colunaOrigem) { //movendo-se para a direita
+					aux = 1;
+					while (colunaOrigem + aux != colunaDestino) {
+						if (pos[linhaOrigem][colunaOrigem + aux].isOcupada())
+							return false;
+						aux++;
+						//cout << "False, Coluna 1" << endl;
+					} //fim while
+					return true;
+
+				} else { //movendo-se para a esquerda
+					aux=1;
+					while (colunaOrigem - (aux) != colunaDestino) {
+						if (pos[linhaOrigem][colunaOrigem - aux].isOcupada())
+							return false;
+						aux++;
+						//cout << "False, Coluna 2" << endl;
+					} //fim while
+					return true;
+				}
+			} //fim movimento na horizontal
+			if (colunaDestino == colunaOrigem) { // Movimento Vertical
+				if (linhaDestino > linhaOrigem) { //movendo-se de baixo para cima
+					aux = 1;
+					while (linhaOrigem + aux != linhaDestino) {
+						if (pos[linhaOrigem + aux][colunaOrigem].isOcupada())
+							return false;
+						aux++;
+					} //fim while
+					return true;
+				} else { //movendo-se de baixo para cima
+					aux=1;
+					while (linhaOrigem - aux != linhaDestino) {
+						if (pos[linhaOrigem - aux][colunaOrigem].isOcupada())
+							return false;
+						aux++;
+					} //fim while
+					return true;
+
+				}
+
+			} //fim movimento na vertical
+			if (linhaDestino > linhaOrigem) { // movimento Diagonal SUperior
+				if (colunaDestino > colunaOrigem) { // Diagonal Superior Direita
+					aux = 1;
+					while (linhaOrigem + aux != linhaDestino
+							&& colunaOrigem + aux != colunaDestino) {
+						if (pos[linhaOrigem + aux][colunaOrigem + aux].isOcupada())
+							return false;
+						aux++;
+					} // fim while
+					return true;
+
+				} else { // Diagonal Superior esquerda
+					aux = 1;
+					while (linhaOrigem + aux != linhaDestino
+							&& colunaOrigem - aux != colunaDestino) {
+						if (pos[linhaOrigem + aux][colunaOrigem - aux].isOcupada())
+							return false;
+						aux++;
+					} //fim while
+					return true;
+
+				}
+
+			} //Fim movimento diagonal Superior
+			else { //inicio movimento diagonal Inferior
+				if (colunaDestino > colunaOrigem) { // Diagonal inferior Direita
+					aux = 1;
+					while (linhaOrigem - aux != linhaDestino
+							&& colunaOrigem + aux != colunaDestino) {
+						if (pos[linhaOrigem - aux][colunaOrigem + aux].isOcupada())
+							return false;
+						aux++;
+					} //fim while
+					return true;
+
+				} else { // Diagonal inferior esquerda
+					aux = 1;
+					while (linhaOrigem - aux != linhaDestino
+							&& colunaOrigem - aux != colunaDestino) {
+						if (pos[linhaOrigem - aux][colunaOrigem - aux].isOcupada())
+							return false;
+						aux++;
+					} //fim while
+					return true;
+
+				} //fim else Diagonal Inferior esquerda
+			} //fim else Diagonal Inferior Direita
+
+		} // Fim do do Else da Dama
+	} //fim do else entre Rei e Cavalo
+return false;
+} // fim da funçao
