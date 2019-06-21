@@ -29,6 +29,9 @@ char Peca::desenha(){
 
 }
 
+int Peca::getSituacao(){
+	return situacao;
+}
 //Troca situção para capturada
 void Peca::setSituacao(){
 	situacao = 0;

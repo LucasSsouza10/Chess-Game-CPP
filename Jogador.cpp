@@ -19,8 +19,19 @@ string Jogador::getNome(){
 	return nome;
 }
 
-//Atribui o conjunto de peças ao jogador
+//Atribui o conjunto de peï¿½as ao jogador
 void Jogador::addPecas(Peca *p){
 	pecas[quantPecas] = p;
 	quantPecas++;
+}
+
+string Jogador::getMortas(){
+	string str = "";
+	for (int i = 0; i < 16; ++i) {
+		if(pecas[i]->getSituacao() == 0){
+			str += pecas[i]->desenha();
+			str += " ";
+		}
+	}
+	return str;
 }

@@ -1,4 +1,5 @@
 #include "Peao.h"
+#include <math.h>
 using namespace std;
 
 //Construtor com cor pré-definida
@@ -32,7 +33,11 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	if(origem.getLinha() - destino.getLinha() != 1  && origem.getLinha()  - destino.getLinha() != -1){
 		//a não ser que seja seu primeiro movimento
 		if((origem.getLinha() == 2 && cor == 'B') || (origem.getLinha() == 7 && cor == 'P'))
-			return true;
+            //no primeiro movimento, pode mover até duas casas
+            if(abs(origem.getLinha() - destino.getLinha()) <= 2)
+                return true;
+            else
+                return false;
 		else
 			return false;
 	}
