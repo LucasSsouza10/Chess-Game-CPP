@@ -30,7 +30,7 @@ public:
 	void setVez(int);
 	void playGame();
 	bool validarFormato(std::string);
-	bool mover(std::string);
+	bool mover(std::string, int);
 	void salvarEstado(std::string);
 	void carregar();
 	void limparSalvo();

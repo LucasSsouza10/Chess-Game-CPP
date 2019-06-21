@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Construtor com nomes de cada jogador
 Jogo::Jogo(string n1, string n2) {
 	estado = 0;
 	vez = 2; //2 para quando iniciar o jogo comecar pelo jogador 1
@@ -22,6 +23,7 @@ Jogo::Jogo(string n1, string n2) {
 
 }
 
+//Construtor padrão
 Jogo::Jogo() {
 	estado = 0;
 	vez = 0;
@@ -40,6 +42,7 @@ Jogo::Jogo() {
 	tab = new Tabuleiro(p);
 }
 
+//Destrutor
 Jogo::~Jogo() {
 	for (int i = 0; i < 32; ++i) {
 		delete p[i];
@@ -49,6 +52,7 @@ Jogo::~Jogo() {
 
 }
 
+//Cria vetor com 16 peças para cada jogador
 void Jogo::criarPecas() {
 	//Criando peaos
 	for (int i = 8; i < 16; i++) {
@@ -93,12 +97,16 @@ void Jogo::criarPecas() {
 void Jogo::setEstado(int est) {
 	estado = est;
 }
+
 void Jogo::setVez(int v) {
 	vez = v;
 }
 
+//Classe que gerencia a partida
 void Jogo::playGame() {
 	string move;
+
+	estado = 0; //Define como inicio de jogo
 
 	while (true) {
 
@@ -112,7 +120,7 @@ void Jogo::playGame() {
 		tab->desenharTabuleiro();
 
 		//Pedido de entrada de movimento
-		cout << "Jogador " << vez << " por favor entre com seu movimento: ";
+		cout << "Jogador " << vez << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
 		getline(cin, move);
 
 		if (move.compare("0") == 0) { //condição para interromper o jogo
@@ -120,7 +128,7 @@ void Jogo::playGame() {
 		}
 
 		while (validarFormato(move) == false) {
-			cout << "Formato invalido. Tente novamente: ";
+			cout << vez << "     "  << "Formato invalido. Tente novamente: ";
 			getline(cin, move);
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
@@ -128,7 +136,7 @@ void Jogo::playGame() {
 			}
 		}
 
-		while (mover(move) == false) {
+		while (mover(move, vez) == false) {
 
 			cout << "Movimento invalido. Tente novamente: ";
 			getline(cin, move);
@@ -151,6 +159,7 @@ void Jogo::playGame() {
 	}
 }
 
+//Verifica se o usuário digitou o movimento no formato correto ("pos. inicial -> pos. final)
 bool Jogo::validarFormato(string m) {
 
 	//Um movimento valido tem 8 caracteres
@@ -168,6 +177,7 @@ bool Jogo::validarFormato(string m) {
 		return false;
 	}
 
+	//verifica se a seta (' -> ') foi digitada corretamente
 	if (m[3] != '-' || m[4] != '>') {
 		return false;
 	}
@@ -186,23 +196,31 @@ bool Jogo::validarFormato(string m) {
 		return true;
 }
 
-bool Jogo::mover(string m) {
+//Move a peça
+bool Jogo::mover(string m, int vez) {
 	int origemLinha, origemColuna, destinoLinha, destinoColuna;
 	origemLinha = m[1] - '1'; //para transformar o caractere em um int correspondente
 	origemColuna = toupper(m[0]) - 'A';
 	destinoLinha = m[7] - '1';
 	destinoColuna = toupper(m[6]) - 'A';
 
-	return tab->movimenta(origemLinha, origemColuna, destinoLinha,
-			destinoColuna);
+	char cor;
+	if (vez == 1)
+        cor = j1->getCor();
+    else
+        cor = j2->getCor();
+
+	return tab->movimenta(origemLinha, origemColuna, destinoLinha, destinoColuna, cor);
 }
 
+//Salva o jogo
 void Jogo::salvarEstado(string m) {
 	ofstream out("JogoSalvo.txt", ios::app);
 	out << m << "\n";
 	out.close();
 }
 
+//Carrega o jogo
 void Jogo::carregar() {
 	ifstream read("JogoSalvo.txt");
 	string move;
@@ -214,12 +232,13 @@ void Jogo::carregar() {
 			else
 				vez = 1;
 
-			mover(move);
+			mover(move, vez);
 		}
 	}
 	read.close();
 }
 
+//Sobrescreve o arquivo de salvamento com um jogo novo
 void Jogo::limparSalvo() {
 	ofstream ofs;
 	ofs.open("JogoSalvo.txt", ofstream::out | ofstream::trunc);

@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Construtor que recebe vetor de peças
 Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly initialized")
 		{
 	//construindo matriz de posicao
@@ -23,7 +24,7 @@ Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly in
 		}
 	}
 
-	//Setando linha coluna e cor da posicao
+	//Setando linha, coluna e cor da posicao
 	for (int i = 0; i < 8; ++i) {
 		for (int j = 0; j < 8; ++j) {
 			pos[i][j].setLinha(i + 1);
@@ -36,6 +37,7 @@ Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly in
 	}
 }
 
+//Desenha o tabuleiro na tela
 void Tabuleiro::desenharTabuleiro() {
 	cout << "     A     B     C     D     E     F     G     H   " << endl;
 	for (int i = 7; i >= 0; --i) {
@@ -56,69 +58,74 @@ void Tabuleiro::desenharTabuleiro() {
 	cout << "   #################################################" << endl;
 }
 
-bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
-		int colunaDestino) {
-	bool mov = pos[linhaOrigem][colunaOrigem].getPca()->checaMovimento(
-			pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino]);
+//Faz o movimento da peça
+bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino, char cor) {
+    if (pos[linhaOrigem][colunaOrigem].getPca()->getCor() != cor) //Peça não pertence ao jogador
+        return false;
+	bool mov = pos[linhaOrigem][colunaOrigem].getPca()->checaMovimento(pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino]); //Verifica se o movimento é valido
 	cout << mov << endl;
 	if (mov) { //movimento valido
 		cout << "Checou o movimento" << endl;
 		if (!(pos[linhaDestino][colunaDestino].isOcupada()))
 
 		{ // se o lugar nao estiver ocupado
-			if (checaCasasDoMovimento(linhaOrigem, colunaOrigem, linhaDestino,
-					colunaDestino)) { // checa as casas do movimento
-				pos[linhaDestino][colunaDestino].setPca(
-						pos[linhaOrigem][colunaOrigem].getPca());
-				pos[linhaOrigem][colunaOrigem].setPca(NULL);
+			if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) { // checa as casas do movimento
+				pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
+				pos[linhaOrigem][colunaOrigem].setPca(NULL); //Seta a posição origem como vaga
 				return true;
 			} else
 				return false;
-		} else {
-			if ((pos[linhaDestino][colunaDestino].getPca())->getCor()
-					== (pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
-				return false;
-			else
-				return true;
 		}
-	} else
-		return false;
+		else { //Lugar ocupado
+			if ((pos[linhaDestino][colunaDestino].getPca())->getCor() == (pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
+				return false;
+			else if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)){//está ocupado com peça de outra cor
+                captura(linhaDestino, colunaDestino, linhaOrigem, colunaOrigem);
+				return true;
+			}
+		}
+	} else {
+        return false;
+	}
 
 }
 
-bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
-		int linhaDestino, int colunaDestino) {
+//Verifica se existe alguma peça nas posições entre a origem e o destino
+bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 	int aux = 0;
 
 	char tipoPeca = pos[linhaOrigem][colunaOrigem].getPca()->desenha();
 
-	if (tipoPeca == 'R' || tipoPeca == 'r' || tipoPeca == 'C'
-			|| tipoPeca == 'c') { //Pe�as que nao precisam de verificacao pois ou so pulam uma casa ou podem passar por cima de outras pecas
+    //REI
+	if (tipoPeca == 'R' || tipoPeca == 'r' || tipoPeca == 'C' || tipoPeca == 'c') { //Pe�as que nao precisam de verificacao pois ou so pulam uma casa ou podem passar por cima de outras pecas
 		cout << "entro em chegaCasa Rei ou Cavalo" << endl;
 		return true;
 	} else {
 		//PEAO
 		if (tipoPeca == 'P' || tipoPeca == 'p') {
 			if ((linhaDestino - linhaOrigem) > 0) // Movendo Peao do Jogador 1
-					{
+            {
 				//cout << "entro em checa casa Peao > 0" << endl;
 				//cout << "condicao : "
 				//		<< pos[linhaOrigem + 1][colunaOrigem].isOcupada()
 				//		<< endl;
 				//cout << "linha e linha " << pDestino.getLinha() << " " << pOrigem.getLinha() << " " << endl;
 
-				if ((pos[linhaOrigem + 1][colunaOrigem].isOcupada()))
-					return false;
-				else
+				if ((pos[linhaOrigem + 1][colunaOrigem].isOcupada())) {
+                    return false;
+				}
+				else {
 					return true;
+				}
 
 			} else // movendo Peao do jogador 2
 			{
-				//cout << "entro em checa casa Peao < 0" << endl;
-				if (pos[linhaOrigem - 1][colunaOrigem].isOcupada())
-					return false;
-				else
+				if (pos[linhaOrigem - 1][colunaOrigem].isOcupada()) {
+                    return false;
+				}
+				else {
 					return true;
+				}
 			}
 		}
 		//TORRE
@@ -168,8 +175,7 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 			if (linhaDestino > linhaOrigem) {
 				if (colunaDestino > colunaOrigem) {
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
@@ -178,8 +184,7 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 
 				} else {
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem - aux != colunaDestino) {
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem - aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
@@ -191,8 +196,7 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 			} else {
 				if (colunaDestino > colunaOrigem) {
 					aux = 1;
-					while (linhaOrigem - aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
+					while (linhaOrigem - aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem - aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
@@ -214,7 +218,8 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 			}
 
 		} //fim bispo
-		  //Checagem de movimento da dama
+
+        //DAMA
 		else if (tipoPeca == 'D' || tipoPeca == 'd') {
 			if (linhaOrigem == linhaDestino) {
 				if (colunaDestino > colunaOrigem) { //movendo-se para a direita
@@ -311,3 +316,12 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 	} //fim do else entre Rei e Cavalo
 return false;
 } // fim da funçao
+
+bool Tabuleiro::captura(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+    Peca *capturada = pos[linhaDestino][colunaDestino].getPca();
+    //strcpy(capturada->situacao, "capturada"); //situacao é protected!
+    pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
+	pos[linhaOrigem][colunaOrigem].setPca(NULL); //Seta a posição origem como vaga
+
+    return true;
+}

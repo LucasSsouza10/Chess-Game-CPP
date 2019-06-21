@@ -3,16 +3,18 @@
 
 #include "Posicao.h"
 #include "Peca.h"
+#include "string.h"
 
 class Tabuleiro {
 private:
 	Posicao **pos;
-	bool checaCasasDoMovimento(int, int, int, int);
+	bool checaCaminho(int, int, int, int);
+	bool captura(int, int, int, int);
 
 public:
 	Tabuleiro(Peca **p);	//responsavel pela configuração inicial do tabuleiro
-	bool movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
-			int colunaDestino); // responsavel pela manutenção e checagem do tabuleiro a cada jogada
+	bool movimenta(int, int, int, int, char); //responsável pela movimentação das peças
+    int colunaDestino; // responsavel pela manutenção e checagem do tabuleiro a cada jogada
 	void desenharTabuleiro(); //desenha o tabuleiro na tela
 	Posicao getPosicao(int linha, int coluna);
 
