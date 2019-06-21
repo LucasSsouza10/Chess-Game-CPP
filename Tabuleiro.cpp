@@ -1,4 +1,5 @@
 #include "Tabuleiro.h"
+#include "math.h"
 
 using namespace std;
 
@@ -96,13 +97,14 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 		cout << "entro em chegaCasa Rei ou Cavalo" << endl;
 		return true;
 	} else {
+		//PEAO
 		if (tipoPeca == 'P' || tipoPeca == 'p') {
 			if ((linhaDestino - linhaOrigem) > 0) // Movendo Peao do Jogador 1
 					{
-				cout << "entro em checa casa Peao > 0" << endl;
-				cout << "condicao : "
-						<< pos[linhaOrigem + 1][colunaOrigem].isOcupada()
-						<< endl;
+				//cout << "entro em checa casa Peao > 0" << endl;
+				//cout << "condicao : "
+				//		<< pos[linhaOrigem + 1][colunaOrigem].isOcupada()
+				//		<< endl;
 				//cout << "linha e linha " << pDestino.getLinha() << " " << pOrigem.getLinha() << " " << endl;
 
 				if ((pos[linhaOrigem + 1][colunaOrigem].isOcupada()))
@@ -112,20 +114,23 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 
 			} else // movendo Peao do jogador 2
 			{
-				cout << "entro em checa casa Peao < 0" << endl;
+				//cout << "entro em checa casa Peao < 0" << endl;
 				if (pos[linhaOrigem - 1][colunaOrigem].isOcupada())
 					return false;
 				else
 					return true;
 			}
-		} else if (tipoPeca == 'T' || tipoPeca == 't') {
+		}
+		//TORRE
+		else if (tipoPeca == 'T' || tipoPeca == 't') {
 			if (linhaOrigem == linhaDestino)
 				if (colunaDestino > colunaOrigem) { //movendo-se para a direita
-					aux = 0;
+					aux = 1;
 					while (colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
+						//cout << "False, Coluna 1" << endl;
 					}
 					return true;
 				} else { //movendo-se para a esquerda
@@ -133,30 +138,79 @@ bool Tabuleiro::checaCasasDoMovimento(int linhaOrigem, int colunaOrigem,
 						if (pos[linhaOrigem][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
+						//cout << "False, Coluna 2" << endl;
 					}
-				  return true;
+					return true;
 				}
-			else if (colunaOrigem == colunaDestino)
-				if (linhaDestino > linhaOrigem) { //movendo-se de baixo para cima
-					aux = 0;
-					while (linhaOrigem + aux != linhaDestino) {
-						if (pos[linhaOrigem + aux][colunaOrigem].isOcupada())
-							return false;
-						aux++;
-					}
-					return true;
-				} else { //movendo-se de baixo para cima
-					while (linhaOrigem - aux != linhaDestino) {
-						if (pos[linhaOrigem - aux][colunaOrigem].isOcupada())
-							return false;
-						aux++;
-					}
-					return true;
+			else if (linhaDestino > linhaOrigem) { //movendo-se de baixo para cima
+				aux = 1;
+				while (linhaOrigem + aux != linhaDestino) {
+					if (pos[linhaOrigem + aux][colunaOrigem].isOcupada())
+						return false;
+					aux++;
+				}
+				return true;
+			} else { //movendo-se de baixo para cima
+				while (linhaOrigem - aux != linhaDestino) {
+					if (pos[linhaOrigem - aux][colunaOrigem].isOcupada())
+						return false;
+					aux++;
+				}
+				return true;
 
-				}
+			}
 
 		}
+		//Bispo
+		else if (tipoPeca == 'B' || tipoPeca == 'b') {
+			if (linhaDestino > linhaOrigem) {
+				if (colunaDestino > colunaOrigem) {
+					aux = 1;
+					while (linhaOrigem + aux != linhaDestino
+							&& colunaOrigem + aux != colunaDestino) {
+						if (pos[linhaOrigem + aux][colunaOrigem + aux].isOcupada())
+							return false;
+						aux++;
+					}
+					return true;
 
+				} else {
+					aux = 1;
+					while (linhaOrigem + aux != linhaDestino
+							&& colunaOrigem - aux != colunaDestino) {
+						if (pos[linhaOrigem + aux][colunaOrigem - aux].isOcupada())
+							return false;
+						aux++;
+					}
+					return true;
+
+				}
+
+			} else {
+				if (colunaDestino > colunaOrigem) {
+					aux = 1;
+					while (linhaOrigem - aux != linhaDestino
+							&& colunaOrigem + aux != colunaDestino) {
+						if (pos[linhaOrigem - aux][colunaOrigem + aux].isOcupada())
+							return false;
+						aux++;
+					}
+					return true;
+
+				} else {
+					aux = 1;
+					while (linhaOrigem - aux != linhaDestino
+							&& colunaOrigem - aux != colunaDestino) {
+						if (pos[linhaOrigem - aux][colunaOrigem - aux].isOcupada())
+							return false;
+						aux++;
+					}
+					return true;
+
+				}
+
+			}
+
+		} //fim bispo
 	}
-	return true;
 }
