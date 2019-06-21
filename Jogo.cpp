@@ -116,8 +116,10 @@ void Jogo::playGame() {
 		else
 			vez = 1;
 
+		string detalheJ1 = j1->getNome() + ": " + j1->getMortas();
+		string detalheJ2 = j2->getNome() + ": " + j2->getMortas();
 		//Mostra o tabuleiro
-		tab->desenharTabuleiro();
+		tab->desenharTabuleiro(detalheJ1, detalheJ2);
 
 		//Pedido de entrada de movimento
 		cout << "Jogador " << vez << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
@@ -244,3 +246,4 @@ void Jogo::limparSalvo() {
 	ofs.open("JogoSalvo.txt", ofstream::out | ofstream::trunc);
 	ofs.close();
 }
+

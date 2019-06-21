@@ -15,6 +15,7 @@ public:
 	virtual bool checaMovimento(Posicao origem, Posicao destino);
 	virtual char desenha();
 	char getCor();
+	int getSituacao();
 	void setSituacao(); //Troca situção para capturada
 };
 
