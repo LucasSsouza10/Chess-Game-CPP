@@ -15,7 +15,7 @@ public:
 	Tabuleiro(Peca **p);	//responsavel pela configuração inicial do tabuleiro
 	bool movimenta(int, int, int, int, char); //responsável pela movimentação das peças
     int colunaDestino; // responsavel pela manutenção e checagem do tabuleiro a cada jogada
-	void desenharTabuleiro(); //desenha o tabuleiro na tela
+	void desenharTabuleiro(std::string, std::string); //desenha o tabuleiro na tela
 	Posicao getPosicao(int linha, int coluna);
 
 };

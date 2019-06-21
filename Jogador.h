@@ -17,6 +17,7 @@ class Jogador {
 		void addPecas(Peca*);
 		char getCor();
 		std::string getNome();
+		std::string getMortas();
 };
 
 #endif /* JOGADOR_H_ */

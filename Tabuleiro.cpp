@@ -38,11 +38,18 @@ Tabuleiro::Tabuleiro(Peca **p) // @suppress("Class members should be properly in
 }
 
 //Desenha o tabuleiro na tela
-void Tabuleiro::desenharTabuleiro() {
-	cout << "     A     B     C     D     E     F     G     H   " << endl;
+void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
+	cout << "     A     B     C     D     E     F     G     H                        Peças Mortas" << endl;
 	for (int i = 7; i >= 0; --i) {
-		cout << "   #################################################" << endl;
-		cout << "   #     #     #     #     #     #     #     #     #" << endl;
+		if(i == 7){
+			cout << "   #################################################                    "<< detalhes1 << endl;
+			cout << "   #     #     #     #     #     #     #     #     #                    " << detalhes2 << endl;
+		}else{
+			cout << "   #################################################" << endl;
+			cout << "   #     #     #     #     #     #     #     #     #" << endl;
+
+		}
+
 
 		cout << " " << i + 1 << " ";
 		for (int j = 0; j < 8; ++j) {
