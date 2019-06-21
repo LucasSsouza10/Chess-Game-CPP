@@ -52,6 +52,5 @@ void Posicao::setColuna(int c){
 void Posicao::setLinha(int l){
 	if(l <= 8 && l >= 1)
 		linha = l;
-
 }
 

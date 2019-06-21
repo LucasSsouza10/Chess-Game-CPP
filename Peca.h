@@ -8,7 +8,7 @@ class Posicao;
 class Peca {
 protected:
 	char cor;
-	std::string situacao;
+	std::string situacao; //Em jogo ou capturada
 public:
 	Peca(char);
 	virtual ~Peca();

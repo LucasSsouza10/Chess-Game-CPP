@@ -1,26 +1,28 @@
 #include "Peao.h"
 using namespace std;
 
+//Construtor com cor pré-definida
 Peao::Peao(char c) : Peca(c){
 
 }
 
+//Verifica o movimento de cada peça
 bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	if((cor == 'B' && origem.getLinha() > destino.getLinha()) ||
 		(cor == 'P' && origem.getLinha() < destino.getLinha()))
 	{
 		return false;  // peao não pode movimentar para tras
 	}
-
-	if( origem.getColuna() != destino.getColuna() )
-	{
 	// peao não pode movimentar horizontalmente
 	//  a menos que ira capturar uma peca inimiga
-		if( origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
+	if( origem.getColuna() != destino.getColuna() )
+	{
+		if(origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
 		{
 		// para capturar a peca inimiga presisa estar lá
-			if(destino.isOcupada() && destino.getPca()->getCor() != cor)
+			if(destino.isOcupada() && destino.getPca()->getCor() != cor) {
 				return true;
+			}
 			else
 				return false;
 		}
@@ -38,6 +40,7 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	return true;
 }
 
+//Retorna a inicial da peça a ser desenhada no tabuleiro
 char Peao::desenha()
 {
 		if(cor == 'B')
