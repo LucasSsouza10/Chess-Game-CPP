@@ -17,6 +17,8 @@ public:
 	char getCor();
 	int getSituacao();
 	void setSituacao(); //Troca situção para capturada
+	bool operator==(Peca&);
+
 };
 
 #endif /* PECA_H_ */
