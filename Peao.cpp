@@ -18,7 +18,7 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	//  a menos que ira capturar uma peca inimiga
 	if( origem.getColuna() != destino.getColuna() )
 	{
-		if(origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1)
+		if(((origem.getLinha() == destino.getLinha() - 1 && cor == 'P') || (origem.getLinha() == destino.getLinha() + 1 && cor == 'B')) && (origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1))
 		{
 		// para capturar a peca inimiga presisa estar lá
 			if(destino.isOcupada() && destino.getPca()->getCor() != cor) {

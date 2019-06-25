@@ -72,13 +72,13 @@ void Jogo::criarPecas() {
 	p[2] = new Bispo(j1->getCor());
 	p[18] = new Bispo(j2->getCor());
 
-	//REI
-	p[3] = new Rei(j1->getCor());
-	p[19] = new Rei(j2->getCor());
+	//Dama
+	p[3] = new Dama(j1->getCor());
+	p[19] = new Dama(j2->getCor());
 
-	//Rainha
-	p[4] = new Dama(j1->getCor());
-	p[20] = new Dama(j2->getCor());
+	//Rei
+	p[4] = new Rei(j1->getCor());
+	p[20] = new Rei(j2->getCor());
 
 	//Bispo da direita
 	p[5] = new Bispo(j1->getCor());
@@ -106,8 +106,6 @@ void Jogo::setVez(int v) {
 void Jogo::playGame() {
 	string move;
 
-	estado = 0; //Define como inicio de jogo
-
 	while (true) {
 
 		//depois de cada movimento trocamos a vez de jogar
@@ -121,8 +119,12 @@ void Jogo::playGame() {
 		//Mostra o tabuleiro
 		tab->desenharTabuleiro(detalheJ1, detalheJ2);
 
+		//Notificando Estado do jogo
+		cout << estado << endl;
+
 		//Pedido de entrada de movimento
-		cout << "Jogador " << vez << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
+		cout << "Jogador " << vez
+				<< ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
 		getline(cin, move);
 
 		if (move.compare("0") == 0) { //condição para interromper o jogo
@@ -130,7 +132,7 @@ void Jogo::playGame() {
 		}
 
 		while (validarFormato(move) == false) {
-			cout << vez << "     "  << "Formato invalido. Tente novamente: ";
+			cout << vez << "     " << "Formato invalido. Tente novamente: ";
 			getline(cin, move);
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
@@ -156,6 +158,13 @@ void Jogo::playGame() {
 				}
 			}
 		}
+
+		cout << "voltou" << endl;
+		//verifica estado
+				if (vez == 2) {
+					estado = tab->verificaEstado('R');
+				} else
+					estado = tab->verificaEstado('r');
 
 		salvarEstado(move);
 	}
@@ -208,11 +217,12 @@ bool Jogo::mover(string m, int vez) {
 
 	char cor;
 	if (vez == 1)
-        cor = j1->getCor();
-    else
-        cor = j2->getCor();
+		cor = j1->getCor();
+	else
+		cor = j2->getCor();
 
-	return tab->movimenta(origemLinha, origemColuna, destinoLinha, destinoColuna, cor);
+	return tab->movimenta(origemLinha, origemColuna, destinoLinha,
+			destinoColuna, cor);
 }
 
 //Salva o jogo
