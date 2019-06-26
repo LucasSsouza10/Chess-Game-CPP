@@ -57,10 +57,12 @@ char Cavalo::desenha()
 		else
 			return 'c';
 }
-//construtor de copia
-Cavalo::Cavalo(const Cavalo &p) : Peca(p.cor) {
+
+Cavalo::Cavalo(Cavalo const &p) : Peca(p) {
 
 }
 
-
+Cavalo* Cavalo::clone() const {
+	return new Cavalo(*this);
+}
 

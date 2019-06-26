@@ -18,7 +18,7 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	//  a menos que ira capturar uma peca inimiga
 	if( origem.getColuna() != destino.getColuna() )
 	{
-		if(((origem.getLinha() == destino.getLinha() - 1 && cor == 'P') || (origem.getLinha() == destino.getLinha() + 1 && cor == 'B')) && (origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() + 1))
+		if(((origem.getLinha() == destino.getLinha() - 1 && cor == 'P') || (origem.getLinha() == destino.getLinha() + 1 && cor == 'B')) && (origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() - 1))
 		{
 		// para capturar a peca inimiga presisa estar lá
 			if(destino.isOcupada() && destino.getPca()->getCor() != cor) {
@@ -34,15 +34,17 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 		//a não ser que seja seu primeiro movimento
 		if((origem.getLinha() == 2 && cor == 'B') || (origem.getLinha() == 7 && cor == 'P'))
             //no primeiro movimento, pode mover até duas casas
-            if(abs(origem.getLinha() - destino.getLinha()) <= 2)
+            if(abs(origem.getLinha() - destino.getLinha()) <= 2 && origem.getColuna() == destino.getColuna() && !destino.isOcupada())
                 return true;
             else
                 return false;
 		else
 			return false;
+	}else{
+		if(origem.getColuna() == destino.getColuna() && !destino.isOcupada())
+			return true;
 	}
-
-	return true;
+	return false;
 }
 
 //Retorna a inicial da peça a ser desenhada no tabuleiro
@@ -55,7 +57,11 @@ char Peao::desenha()
 
 }
 //construtor de copia
-Peao::Peao(const Peao &p) : Peca(p.cor) {
+Peao::Peao(Peao const &p) : Peca(p) {
 
+}
+
+Peao* Peao::clone() const {
+	return new Peao(*this);
 }
 

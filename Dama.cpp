@@ -36,8 +36,11 @@ char Dama::desenha() {
 		return 'd';
 }
 
-//construtor de copia
-Dama::Dama(const Dama &p) : Peca(p.cor) {
+Dama::Dama(Dama const &p) : Peca(p) {
 
+}
+
+Dama* Dama::clone() const {
+	return new Dama(*this);
 }
 

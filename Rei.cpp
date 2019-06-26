@@ -2,6 +2,7 @@
 
 Rei::Rei(char c) :
 		Peca(c) {
+	std::cout << "entrou1" << std::endl;
 
 }
 
@@ -23,8 +24,11 @@ char Rei::desenha() {
 	else
 		return 'r';
 }
-//construtor de copia
-Rei::Rei(const Rei &p) : Peca(p.cor) {
+
+Rei::Rei(Rei const &p) : Peca(p) {
 
 }
 
+Rei* Rei::clone() const {
+	return new Rei(*this);
+}

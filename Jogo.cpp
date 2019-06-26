@@ -209,6 +209,7 @@ bool Jogo::validarFormato(string m) {
 
 //Move a peça
 bool Jogo::mover(string m, int vez) {
+	cout << "mover" <<endl;
 	int origemLinha, origemColuna, destinoLinha, destinoColuna;
 	origemLinha = m[1] - '1'; //para transformar o caractere em um int correspondente
 	origemColuna = toupper(m[0]) - 'A';

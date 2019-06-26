@@ -22,10 +22,14 @@ char Bispo::desenha()
 		return 'b';
 }
 
-//construtor de copia
-Bispo::Bispo(const Bispo &p) : Peca(p.cor) {
+Bispo::Bispo(Bispo const&p) : Peca(p) {
 
 }
+
+Bispo* Bispo::clone() const {
+	return new Bispo(*this);
+}
+
 
 
 

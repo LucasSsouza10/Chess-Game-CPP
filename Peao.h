@@ -9,9 +9,11 @@ class Peao : public Peca
 {
 public:
 	Peao(char);
-	Peao(const Peao&);
+	Peao(Peao const &);
+	Peao * clone() const;
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
+
 };
 
 #endif /* PEAO_H_ */

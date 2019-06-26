@@ -16,7 +16,8 @@ class Bispo : public Peca
 {
 public:
 	Bispo(char);
-	Bispo(const Bispo&);
+	Bispo(Bispo const&);
+	Bispo * clone() const;
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 

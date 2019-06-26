@@ -1,4 +1,3 @@
-
 #ifndef REI_H_
 #define REI_H_
 
@@ -6,11 +5,11 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Rei : public Peca
-{
+class Rei: public Peca {
 public:
 	Rei(char);
-	Rei(const Rei&);
+	Rei(Rei const &);
+	Rei* clone() const;
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };

@@ -15,7 +15,7 @@ private:
 	bool ocupada;
 public:
 	Posicao();
-	Posicao(Posicao &p); //Construtor de cópia
+	Posicao(Posicao const &p); //Construtor de cï¿½pia
 	int getLinha();
 	int getColuna();
 	char getCor();

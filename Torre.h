@@ -5,11 +5,11 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Torre : public Peca
-{
+class Torre: public Peca {
 public:
 	Torre(char);
-	Torre(const Torre&);
+	Torre(Torre const&);
+	virtual Torre * clone() const;
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };

@@ -33,9 +33,12 @@ char Torre::desenha()
 	else
 		return 't';
 }
-//construtor de copia
-Torre::Torre(const Torre &p) : Peca(p.cor) {
+
+Torre::Torre(Torre const&p) : Peca(p) {
 
 }
 
+Torre* Torre::clone() const {
+	return new Torre(*this);
+}
 

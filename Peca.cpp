@@ -21,7 +21,6 @@ char Peca::getCor(){
 
 //Checa o movimento de cada pe�a (implementada nas subclasses)
 bool Peca::checaMovimento(Posicao origem, Posicao destino){
-
 }
 
 //Desenha cada pe�a no tabuleiro
@@ -47,8 +46,6 @@ bool Peca::operator==(Peca &pecas)
 
 
 }
-//construtor de copia
-Peca::Peca(const Peca &p){
-	situacao = p.situacao;
-}
+
+
 

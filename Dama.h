@@ -12,14 +12,13 @@
 #include "Peca.h"
 #include "Posicao.h"
 
-class Dama : public Peca
-{
+class Dama: public Peca {
 public:
 	Dama(char);
-	Dama(const Dama&);
+	Dama(Dama const &);
+	Dama* clone() const;
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
-
 };
 
 #endif /* DAMA_H_ */
