@@ -9,7 +9,7 @@ bool Rei::checaMovimento(Posicao origem, Posicao destino) {
 
 	//o rei pode se mover pra qualquer direcao somente uma posicao.
 	if ((destino.getColuna() == origem.getColuna() + 1 || destino.getColuna() == origem.getColuna() -1)
-			&& (destino.getLinha() == origem.getLinha() + 1 ||destino.getLinha() == origem.getLinha() -1 ))
+			&&  (destino.getLinha() == origem.getLinha() + 1 ||destino.getLinha() == origem.getLinha() -1 ))
 
 
 		return true;
