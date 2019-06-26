@@ -9,6 +9,13 @@ Posicao::Posicao(){
 	ocupada = false;
 }
 
+Posicao::Posicao(Posicao &p) : pca(p.pca) {
+    cor = p.cor;
+    linha = p.linha;
+    coluna = p.coluna;
+    ocupada = p.ocupada;
+}
+
 int Posicao::getLinha(){
 	return linha;
 }

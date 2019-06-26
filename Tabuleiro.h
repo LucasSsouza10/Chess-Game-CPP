@@ -11,7 +11,7 @@ private:
 	bool checaCaminho(int, int, int, int);
 	void captura(int, int); //Altera o estado da peça quando ela é capturada
 	Posicao* procuraRei(char); //Busca pela posição do rei no tabuleiro
-	bool checaRisco(Posicao*, Posicao*); //Verifica se o rei está em xeque
+	bool checaRisco(Posicao, Posicao); //Verifica se o rei está em xeque
 public:
 	Tabuleiro(Peca **p);	//responsavel pela configuração inicial do tabuleiro
 	bool movimenta(int, int, int, int, char); //responsável pela movimentação das peças
