@@ -22,6 +22,10 @@ char Bispo::desenha()
 		return 'b';
 }
 
+//construtor de copia
+Bispo::Bispo(const Bispo &p) : Peca(p.cor) {
+
+}
 
 
 

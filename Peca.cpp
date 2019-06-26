@@ -47,4 +47,8 @@ bool Peca::operator==(Peca &pecas)
 
 
 }
+//construtor de copia
+Peca::Peca(const Peca &p){
+	situacao = p.situacao;
+}
 

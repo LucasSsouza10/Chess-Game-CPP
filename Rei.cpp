@@ -23,4 +23,8 @@ char Rei::desenha() {
 	else
 		return 'r';
 }
+//construtor de copia
+Rei::Rei(const Rei &p) : Peca(p.cor) {
+
+}
 

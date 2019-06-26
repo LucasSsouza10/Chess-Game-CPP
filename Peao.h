@@ -9,6 +9,7 @@ class Peao : public Peca
 {
 public:
 	Peao(char);
+	Peao(const Peao&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };

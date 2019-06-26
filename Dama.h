@@ -16,8 +16,10 @@ class Dama : public Peca
 {
 public:
 	Dama(char);
+	Dama(const Dama&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
+
 };
 
 #endif /* DAMA_H_ */

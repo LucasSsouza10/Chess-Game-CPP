@@ -11,6 +11,7 @@ protected:
 	int situacao; // 1 Em jogo ou 0 capturada
 public:
 	Peca(char);
+	Peca(const Peca&);
 	virtual ~Peca();
 	virtual bool checaMovimento(Posicao origem, Posicao destino);
 	virtual char desenha();
@@ -18,6 +19,7 @@ public:
 	int getSituacao();
 	void setSituacao(); //Troca situção para capturada
 	bool operator==(Peca&);
+
 
 };
 

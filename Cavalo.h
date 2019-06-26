@@ -9,6 +9,7 @@ class Cavalo : public Peca{
 
 public:
 	Cavalo(char);
+	Cavalo(const Cavalo&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };

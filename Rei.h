@@ -10,6 +10,7 @@ class Rei : public Peca
 {
 public:
 	Rei(char);
+	Rei(const Rei&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };

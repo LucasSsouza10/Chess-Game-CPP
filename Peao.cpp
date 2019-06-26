@@ -54,3 +54,8 @@ char Peao::desenha()
 			return 'p';
 
 }
+//construtor de copia
+Peao::Peao(const Peao &p) : Peca(p.cor) {
+
+}
+

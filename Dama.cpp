@@ -35,3 +35,9 @@ char Dama::desenha() {
 	else
 		return 'd';
 }
+
+//construtor de copia
+Dama::Dama(const Dama &p) : Peca(p.cor) {
+
+}
+

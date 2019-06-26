@@ -16,8 +16,10 @@ class Bispo : public Peca
 {
 public:
 	Bispo(char);
+	Bispo(const Bispo&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
+
 };
 
 #endif /* BISPO_H_ */
