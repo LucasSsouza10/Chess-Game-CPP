@@ -9,6 +9,7 @@ class Torre : public Peca
 {
 public:
 	Torre(char);
+	Torre(const Torre&);
 	bool checaMovimento(Posicao origem, Posicao destino);
 	char desenha();
 };
