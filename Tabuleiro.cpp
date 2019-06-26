@@ -360,111 +360,102 @@ int Tabuleiro::verificaEstado(char r) {
 	int cima = 0, baixo = 0, direita = 0, esquerda = 0, supEsq = 0, supDir = 0,
 			infEsq = 0, infDir = 0;
 
-	cout << "procurou o rei " << pos_rei->getLinha() << " "
-			<< pos_rei->getColuna() << endl;
+	cout << "procurou o rei " << pos_rei->getLinha() << " " << pos_rei->getColuna() << endl;
 	for (int i = 0; i < 8; ++i) {
 		for (int j = 0; j < 8; ++j) {
 			if (pos[i][j].isOcupada() && !(i == linha && j == coluna))
-				if (checaRisco(&pos[linha][coluna], &pos[i][j])) { //se o rei estiver em risco ele esta em cheque
+				if (checaRisco(pos[linha][coluna], pos[i][j])) { //se o rei estiver em risco ele esta em cheque
 					//Agora tem que verificar se é cheque-mate
-					cout << "Rei em risco"
+					cout << "Rei em risco" << endl;
 					for (int k = 0; k < 8; ++k) {
 						for (int l = 0; l < 8; ++l) {
 							if (pos[k][l].isOcupada() && !(k == i && l == j)){
 								cout << "verificando o adv do rei" << endl;
-								if (checaRisco(&pos[i][j], &pos[k][l])) { // verifica se a peça que põe o rei em risco pode ser morta
+								if (checaRisco(pos[i][j], pos[k][l])) { // verifica se a peça que põe o rei em risco pode ser morta
 									return 1; //estado de cheque
 								} else {
 									cout << "verificando cima" << endl;
-									if ((linha + 1 < 8
-											&& !pos[linha + 1][coluna].isOcupada())
-											|| cima == 1) { // verifica se rei pode se movimentar para cima
-										if (checaRisco(&pos[linha + 1][coluna],
-												&pos[k][l]))
+									if ((linha + 1 < 8 && !pos[linha + 1][coluna].isOcupada()) || cima == 1) { // verifica se rei pode se movimentar para cima
+										Posicao p = pos[linha+1][coluna];
+										p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha + 1][coluna], pos[k][l]))
 											cima = 1;
 									} else
 										cima = 1;
 
 									cout << "verificando baixo" << endl;
-									if ((linha - 1 >= 0
-											&& !pos[linha - 1][coluna].isOcupada())
-											|| baixo == 1) { // verifica se rei pode se movimentar para baixo
-										if (checaRisco(&pos[linha - 1][coluna],
-												&pos[k][l]))
+									if ((linha - 1 >= 0 && !pos[linha - 1][coluna].isOcupada()) || baixo == 1) { // verifica se rei pode se movimentar para baixo
+										Posicao p = pos[linha-1][coluna];
+                                        p.setPca(pos_rei->getPca());
+										if (checaRisco(pos[linha - 1][coluna], pos[k][l]))
 											baixo = 1;
 									} else
 										baixo = 1;
 
 									cout << "verificando esquerda" << endl;
-									if ((coluna - 1 >= 0
-											&& !pos[linha][coluna - 1].isOcupada())
-											|| esquerda == 1) { // verifica se rei pode se movimentar para esquerda
-										if (checaRisco(&pos[linha][coluna - 1],
-												&pos[k][l]))
+									if ((coluna - 1 >= 0 && !pos[linha][coluna - 1].isOcupada()) || esquerda == 1) { // verifica se rei pode se movimentar para esquerda
+                                        Posicao p = pos[linha][coluna-1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha][coluna - 1], pos[k][l]))
 											esquerda = 1;
 									} else
 										esquerda = 1;
 
 									cout << "verificando direita" << endl;
-									if ((coluna + 1 < 8
-											&& !pos[linha][coluna + 1].isOcupada())
-											|| direita == 1) { // verifica se rei pode se movimentar para direita
-										if (checaRisco(&pos[linha][coluna + 1],
-												&pos[k][l]))
+									if ((coluna + 1 < 8 && !pos[linha][coluna + 1].isOcupada()) || direita == 1) { // verifica se rei pode se movimentar para direita
+										Posicao p = pos[linha][coluna+1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha][coluna + 1], pos[k][l]))
 											direita = 1;
 									} else
 										direita = 1;
 
 									cout << "verificando supesq" << endl;
-									if ((linha + 1 < 8 && coluna - 1 >= 0
-											&& !pos[linha + 1][coluna - 1].isOcupada())
-											|| supEsq == 1) { // verifica se rei pode se movimentar para diagonal superior esquerda
-										if (checaRisco(
-												&pos[linha + 1][coluna - 1],
-												&pos[k][l]))
+									if ((linha + 1 < 8 && coluna - 1 >= 0 && !pos[linha + 1][coluna - 1].isOcupada()) || supEsq == 1) { // verifica se rei pode se movimentar para diagonal superior esquerda
+										Posicao p = pos[linha+1][coluna-1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha + 1][coluna - 1], pos[k][l]))
 											supEsq = 1;
 									} else
 										supEsq = 1;
 
 									cout << "verificando supdir" << endl;
-									if ((linha + 1 < 8 && coluna + 1 < 8
-											&& !pos[linha + 1][coluna + 1].isOcupada())
-											|| supDir == 1) { // verifica se rei pode se movimentar para diagonal superior direita
-										if (checaRisco(
-												&pos[linha + 1][coluna - 1],
-												&pos[k][l]))
+									if ((linha + 1 < 8 && coluna + 1 < 8 && !pos[linha + 1][coluna + 1].isOcupada()) || supDir == 1) { // verifica se rei pode se movimentar para diagonal superior direita
+                                        Posicao p = pos[linha+1][coluna+1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha + 1][coluna + 1], pos[k][l]))
 											supDir = 1;
 									} else
 										supDir = 1;
 
 									cout << "verificando infesq" << endl;
-									if ((linha - 1 >= 0 && coluna - 1 >= 0
-											&& !pos[linha - 1][coluna - 1].isOcupada())
-											|| infEsq == 1) { // verifica se rei pode se movimentar para diagonal inferior esquerda
-										if (checaRisco(
-												&pos[linha - 1][coluna - 1],
-												&pos[k][l]))
+									if ((linha - 1 >= 0 && coluna - 1 >= 0 && !pos[linha - 1][coluna - 1].isOcupada()) || infEsq == 1) { // verifica se rei pode se movimentar para diagonal inferior esquerda
+                                        Posicao p = pos[linha-1][coluna-1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha - 1][coluna - 1], pos[k][l]))
 											infEsq = 1;
 									} else
 										infEsq = 1;
 
 									cout << "verificando infdir" << endl;
-									if ((linha - 1 >= 0 && coluna + 1 < 8
-											&& !pos[linha - 1][coluna + 1].isOcupada())
-											|| infDir) { // verifica se rei pode se movimentar para diagonal inferior direita
-										if (checaRisco(
-												&pos[linha - 1][coluna + 1],
-												&pos[k][l]))
+									if ((linha - 1 >= 0 && coluna + 1 < 8 && !pos[linha - 1][coluna + 1].isOcupada()) || infDir) { // verifica se rei pode se movimentar para diagonal inferior direita
+										Posicao p = pos[linha-1][coluna+1];
+                                        p.setPca(pos_rei->getPca());
+
+										if (checaRisco(pos[linha - 1][coluna + 1], pos[k][l]))
 											infDir = 1;
 									} else
 										infDir = 1;
 								}
 							}
 
-							if (cima == 1 && baixo == 1 && esquerda == 1
-									&& direita == 1 && supEsq == 1
-									&& supDir == 1 && infEsq == 1
-									&& infDir == 1)
+							if (cima == 1 && baixo == 1 && esquerda == 1 && direita == 1 && supEsq == 1 && supDir == 1 && infEsq == 1 && infDir == 1)
 								return 2;
 						}
 					}
@@ -491,18 +482,17 @@ Posicao* Tabuleiro::procuraRei(char r) {
 //Verifica se o rei está em xeque
 //Entrada: pos_rei = posicao da peca rei; pos_adv: posicao do adversario
 //Saída: true se o rei pode ser capturado, false se não
-bool Tabuleiro::checaRisco(Posicao *pos_rei, Posicao *pos_adv) {
+bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
 
-	Peca *adv = pos_adv->getPca();
-	Peca *r = pos_rei->getPca();
+	Peca *adv = pos_adv.getPca();
+	Peca *r = pos_rei.getPca();
 
 //Verifica se existe adversario
 	if (adv && adv->getCor() != r->getCor()) {
-		cout << adv->checaMovimento(*pos_adv, *pos_rei) << endl;
+		cout << adv->checaMovimento(pos_adv, pos_rei) << endl;
 		//Verifica se a peça inimiga pode capturar o rei
-		if (adv->checaMovimento(*pos_adv, *pos_rei)
-				&& checaCaminho(pos_adv->getLinha() - 1, pos_adv->getColuna() - 1, pos_rei->getLinha() - 1, pos_rei->getColuna() - 1)) //Verifica se o movimento é permitido e válido
-								{
+		if (adv->checaMovimento(pos_adv, pos_rei) && checaCaminho(pos_adv.getLinha() - 1, pos_adv.getColuna() - 1, pos_rei.getLinha() - 1, pos_rei.getColuna() - 1)) //Verifica se o movimento é permitido e válido
+		{
 			cout << "true" << endl;
 			return true; //A peça pode capturar o rei
 		} else
