@@ -18,11 +18,15 @@ Posicao::Posicao(Posicao const &p) {
 	linha = p.linha;
 	coluna = p.coluna;
 	ocupada = p.ocupada;
+	try{
 	if (p.pca) {
 		pca = p.pca->clone();
 	} else
 		pca = NULL;
-
+	}catch(bad_alloc err)
+	{
+		cout << "Erro de alocação de peça" << endl;
+	}
 }
 
 int Posicao::getLinha() {
