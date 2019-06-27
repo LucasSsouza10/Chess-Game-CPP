@@ -538,9 +538,13 @@ return false;
 bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna){
 	cout << destinoLinha << " " << destinoColuna << endl;
 	Posicao p(pos[destinoLinha][destinoColuna]);
+	try{
+	if(!(pos[origemLinha][origemColuna].isOcupada())) throw 99;
 	p.setPca(pos[origemLinha][origemColuna].getPca());
-
-	if(verificaEstado(p) == 0)
+	}catch (int x){
+		if (x==99)
+		return false;
+	}if(verificaEstado(p) == 0)
 		return false;
 	return true;
 }
