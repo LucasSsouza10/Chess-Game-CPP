@@ -16,6 +16,7 @@ int main() {
 	cout << "Jogador 1, por favor, digite seu nome: " << endl;
 	cin >> j1;
 	cout << "Jogador 2, por favor, digite seu nome:" << endl;
+	cin >> j2;
 
 	Jogo jogo(j1, j2);
 
