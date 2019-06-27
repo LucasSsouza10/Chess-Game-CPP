@@ -10,9 +10,17 @@
 using namespace std;
 
 int main() {
-	Jogo jogo;
+	cout << "---------- XADREZ ----------" << endl;
+
+	string j1, j2;
+	cout << "Jogador 1, por favor, digite seu nome: " << endl;
+	cin >> j1;
+	cout << "Jogador 2, por favor, digite seu nome:" << endl;
+
+	Jogo jogo(j1, j2);
+
 	char op;
-	cout << "Deseja retornar ao último ponto de parada: S/N: ";
+	cout << "Deseja retornar ao último ponto de parada? (S/N): ";
 	cin >> op;
 	op = toupper(op);
 	while (op != 'N' && op != 'S') {
@@ -21,9 +29,10 @@ int main() {
 		op = toupper(op);
 	}
 
-	if (op == 'S')
+	if (op == 'S') {
+        cout << "Carregando o jogo..." << endl;
 		jogo.carregar(); //carrega jogo salvo
-	else {
+	} else {
 		jogo.limparSalvo(); //começa um novo jogo
 	}
 
