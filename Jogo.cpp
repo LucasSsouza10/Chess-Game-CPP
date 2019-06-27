@@ -116,7 +116,7 @@ void Jogo::playGame() {
 	string move;
 	string nome;
 
-	while (estado != 2) {
+	while (move.compare("2") != 0) {
 
 		//depois de cada movimento trocamos a vez de jogar
 		if (vez == 1) {
@@ -133,15 +133,28 @@ void Jogo::playGame() {
 		tab->desenharTabuleiro(detalheJ1, detalheJ2);
 
 		//Notificando Estado do jogo quando é xeque
-		if (estado == 1)
+		if (estado == 1){
 			cout << "Atenção, " << nome << " seu rei está em xeque!" << endl;
+			cout << "Se for xeque-mate digite 2" << endl;
+		}
 
 		//Pedido de entrada de movimento
-		cout << "Jogador " << nome << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
+		cout << "Jogador " << nome
+				<< ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
 		getline(cin, move);
 
 		if (move.compare("0") == 0) { //condição para interromper o jogo
 			return;
+		}
+
+		if (move.compare("2") == 0) { //desistir
+			if (vez == 2) {
+				cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
+				return;
+			} else {
+				cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
+				return;
+			}
 		}
 
 		while (validarFormato(move) == false) {
@@ -150,6 +163,16 @@ void Jogo::playGame() {
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
 				return;
+			}
+
+			if (move.compare("2") == 0) {
+				if (vez == 2) {
+					cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
+					return;
+				} else {
+					cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
+					return;
+				}
 			}
 		}
 
@@ -162,6 +185,14 @@ void Jogo::playGame() {
 				return;
 			}
 
+			if (vez == 2) {
+				cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
+				return;
+			} else {
+				cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
+				return;
+			}
+
 			while (validarFormato(move) == false) {
 				cout << "Formato invalido. Tente novamente: ";
 				getline(cin, move);
@@ -169,15 +200,18 @@ void Jogo::playGame() {
 				if (move.compare("0") == 0) { //condição para interromper o jogo
 					return;
 				}
+
+				if (vez == 2) {
+					cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
+					return;
+				} else {
+					cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
+					return;
+				}
 			}
 		}
 		salvarEstado(move);
 	}
-
-	if (vez == 2) {
-		cout << "Parabéns " << j1->getNome() << " você venceu! " << endl;
-	} else
-		cout << "Parabéns " << j2->getNome() << " você venceu! " << endl;
 
 }
 
