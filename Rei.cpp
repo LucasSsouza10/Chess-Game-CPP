@@ -1,8 +1,6 @@
 #include "Rei.h"
 
-Rei::Rei(char c) :
-		Peca(c) {
-	std::cout << "entrou1" << std::endl;
+Rei::Rei(char c) : Peca(c) {
 
 }
 

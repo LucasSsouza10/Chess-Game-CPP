@@ -119,11 +119,10 @@ void Jogo::playGame() {
 	while (estado != 2) {
 
 		//depois de cada movimento trocamos a vez de jogar
-		if (vez == 1){
+		if (vez == 1) {
 			vez = 2;
 			nome = j2->getNome();
-		}
-		else {
+		} else {
 			vez = 1;
 			nome = j1->getNome();
 		}
@@ -133,8 +132,9 @@ void Jogo::playGame() {
 		//Mostra o tabuleiro
 		tab->desenharTabuleiro(detalheJ1, detalheJ2);
 
-		//Notificando Estado do jogo
-		cout << estado << endl;
+		//Notificando Estado do jogo quando é xeque
+		if (estado == 1)
+			cout << "Atenção, " << nome << " seu rei está em xeque!" << endl;
 
 		//Pedido de entrada de movimento
 		cout << "Jogador " << nome << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
@@ -174,9 +174,9 @@ void Jogo::playGame() {
 		salvarEstado(move);
 	}
 
-	if(vez == 2){
+	if (vez == 2) {
 		cout << "Parabéns " << j1->getNome() << " você venceu! " << endl;
-	}else
+	} else
 		cout << "Parabéns " << j2->getNome() << " você venceu! " << endl;
 
 }
@@ -231,32 +231,29 @@ bool Jogo::mover(string m, int vez) {
 		cor = j1->getCor();
 	else
 		cor = j2->getCor();
-try{
-	cout << "verificaMovimento" << endl;
-	if (tab->verificaMovimento(origemLinha, origemColuna, destinoLinha,
-			destinoColuna)) {
-		cout << "Esse movimento põe o rei em xeque!" << endl;
+	try {
+		if (tab->verificaMovimento(origemLinha, origemColuna, destinoLinha,
+				destinoColuna)) {
+			cout << "Esse movimento põe o rei em xeque!" << endl;
+			return false;
+		}
+		bool movimenta = tab->movimenta(origemLinha, origemColuna, destinoLinha,
+				destinoColuna, cor);
+		if (movimenta)
+			if (vez == 2) {
+				estado = tab->checaRei('R');
+			} else
+				estado = tab->checaRei('r');
+		return movimenta;
+	} catch (int x) {
+		if (x == 99) {
+			cout << "Posicaçao selecionada Invalida" << endl;
+			return false;
+		}
+	} catch (exception ex) {
+		cout << "Erro desconhecido" << ex.what() << endl;
 		return false;
 	}
-	bool movimenta = tab->movimenta(origemLinha, origemColuna, destinoLinha,
-			destinoColuna, cor);
-	if (movimenta)
-		if (vez == 2) {
-			estado = tab->checaRei('R');
-		} else
-			estado = tab->checaRei('r');
-	return movimenta;
-}catch(int x){
-	if(x==99)
-	{
-		cout << "Posicaçao selecionada Invalida" << endl;
-		return false;
-	}
-}catch (exception ex)
-{
-	cout << "Erro desconhecido" << ex.what() << endl;
-	return false;
-}
 }
 
 //Salva o jogo
