@@ -25,7 +25,7 @@ Posicao::Posicao(Posicao const &p) {
 		pca = NULL;
 	}catch(bad_alloc err)
 	{
-		cout << "Erro de alocação de peça" << endl;
+		cout << "Erro: memória insuficiente!" << endl;
 	}
 }
 

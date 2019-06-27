@@ -28,7 +28,7 @@ public:
 	~Jogo(); //Destrutor
 	void setEstado(int);
 	void setVez(int);
-	void playGame();
+	int playGame();
 	bool validarFormato(std::string);
 	bool mover(std::string, int);
 	void salvarEstado(std::string);

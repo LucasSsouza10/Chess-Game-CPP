@@ -45,6 +45,7 @@ Tabuleiro::Tabuleiro(Peca **p) { // @suppress("Class members should be properly 
 //Desenha o tabuleiro na tela
 //Entrada: nomes dos jogadores
 void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
+    cout << endl;
 	cout
 			<< "     A     B     C     D     E     F     G     H                        Peças Mortas"
 			<< endl;
@@ -89,28 +90,22 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 	if (pos[linhaOrigem][colunaOrigem].getPca()->getCor() != cor) //Peça não pertence ao jogador
 		return false;
 
-	bool mov = pos[linhaOrigem][colunaOrigem].getPca()->checaMovimento(
-			pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino]); //Verifica se o movimento é valido
+	bool mov = pos[linhaOrigem][colunaOrigem].getPca()->checaMovimento(pos[linhaOrigem][colunaOrigem], pos[linhaDestino][colunaDestino]); //Verifica se o movimento é valido
 	if (mov) { //movimento valido
 		if (!(pos[linhaDestino][colunaDestino].isOcupada())) {
 			// se o lugar nao estiver ocupado
-			if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino,
-					colunaDestino)) { // checa as casas do movimento
-				pos[linhaDestino][colunaDestino].setPca(
-						pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
+			if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) { // checa as casas do movimento
+				pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca()); //Coloca a peça no lugar de destino
 				pos[linhaOrigem][colunaOrigem].setPca(NULL); //Seta a posição origem como vaga
 				return true;
 			} else
 				return false;
 		} else { //Lugar ocupado
-			if ((pos[linhaDestino][colunaDestino].getPca())->getCor()
-					== (pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
+			if ((pos[linhaDestino][colunaDestino].getPca())->getCor() == (pos[linhaOrigem][colunaOrigem].getPca())->getCor()) // esta ocupado com peca de mesma cor;
 				return false;
-			else if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino,
-					colunaDestino)) { //está ocupado com peça de outra cor
+			else if (checaCaminho(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) { //está ocupado com peça de outra cor
 				captura(linhaDestino, colunaDestino);
-				pos[linhaDestino][colunaDestino].setPca(
-						pos[linhaOrigem][colunaOrigem].getPca());
+				pos[linhaDestino][colunaDestino].setPca(pos[linhaOrigem][colunaOrigem].getPca());
 				pos[linhaOrigem][colunaOrigem].setPca(NULL);
 				return true;
 			}
@@ -124,15 +119,13 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 //Verifica se existe alguma peça nas posições entre a origem e o destino
 //Entrada: linhas de origem e destino, colunas de origem e destino
 //Saida: true (caminho livre) ou false (existe peça no caminho)
-bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
-		int linhaDestino, int colunaDestino) {
+bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 	int aux = 0;
 
 	char tipoPeca = pos[linhaOrigem][colunaOrigem].getPca()->desenha();
 
 	//REI
-	if (tipoPeca == 'R' || tipoPeca == 'r' || tipoPeca == 'C'
-			|| tipoPeca == 'c') { //Pe�as que nao precisam de verificacao pois ou so pulam uma casa ou podem passar por cima de outras pecas
+	if (tipoPeca == 'R' || tipoPeca == 'r' || tipoPeca == 'C' || tipoPeca == 'c') { //Pe�as que nao precisam de verificacao pois ou so pulam uma casa ou podem passar por cima de outras pecas
 		return true;
 	} else {
 		//PEAO
@@ -200,8 +193,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 			if (linhaDestino > linhaOrigem) {
 				if (colunaDestino > colunaOrigem) {
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
@@ -210,8 +202,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 
 				} else {
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem - aux != colunaDestino) {
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem - aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
@@ -223,8 +214,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 			} else {
 				if (colunaDestino > colunaOrigem) {
 					aux = 1;
-					while (linhaOrigem - aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
+					while (linhaOrigem - aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem - aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
@@ -233,8 +223,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 
 				} else {
 					aux = 1;
-					while (linhaOrigem - aux != linhaDestino
-							&& colunaOrigem - aux != colunaDestino) {
+					while (linhaOrigem - aux != linhaDestino && colunaOrigem - aux != colunaDestino) {
 						if (pos[linhaOrigem - aux][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
@@ -293,21 +282,16 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 			if (linhaDestino > linhaOrigem) { // movimento Diagonal SUperior
 				if (colunaDestino > colunaOrigem) { // Diagonal Superior Direita
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
-						cout << linhaOrigem + aux << " " << colunaOrigem + aux
-								<< endl;
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
 					} // fim while
-					cout << "aqui" << endl;
 					return true;
 
 				} else { // Diagonal Superior esquerda
 					aux = 1;
-					while (linhaOrigem + aux != linhaDestino
-							&& colunaOrigem - aux != colunaDestino) {
+					while (linhaOrigem + aux != linhaDestino && colunaOrigem - aux != colunaDestino) {
 						if (pos[linhaOrigem + aux][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
@@ -320,8 +304,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 			else { //inicio movimento diagonal Inferior
 				if (colunaDestino > colunaOrigem) { // Diagonal inferior Direita
 					aux = 1;
-					while (linhaOrigem - aux != linhaDestino
-							&& colunaOrigem + aux != colunaDestino) {
+					while (linhaOrigem - aux != linhaDestino && colunaOrigem + aux != colunaDestino) {
 						if (pos[linhaOrigem - aux][colunaOrigem + aux].isOcupada())
 							return false;
 						aux++;
@@ -330,8 +313,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem,
 
 				} else { // Diagonal inferior esquerda
 					aux = 1;
-					while (linhaOrigem - aux != linhaDestino
-							&& colunaOrigem - aux != colunaDestino) {
+					while (linhaOrigem - aux != linhaDestino && colunaOrigem - aux != colunaDestino) {
 						if (pos[linhaOrigem - aux][colunaOrigem - aux].isOcupada())
 							return false;
 						aux++;
@@ -365,7 +347,6 @@ int Tabuleiro::verificaEstado(Posicao pos_rei) {
 				if (checaRisco(pos_rei, pos[i][j])) { //se o rei estiver em risco ele esta em cheque
 					return 1;
 				}
-
 		}
 	}
 	return 0;
@@ -401,8 +382,7 @@ int Tabuleiro::verificaEstado(Posicao pos_rei) {
 //Verifica se existe adversario
 			if (adv && adv->getCor() != r->getCor()) {
 				//Verifica se a peça inimiga pode capturar o rei
-				if (adv->checaMovimento(pos_adv, pos_rei)
-						&& checaCaminho(pos_adv.getLinha() - 1,
+				if (adv->checaMovimento(pos_adv, pos_rei) && checaCaminho(pos_adv.getLinha() - 1,
 								pos_adv.getColuna() - 1, pos_rei.getLinha() - 1,
 								pos_rei.getColuna() - 1))//Verifica se o movimento é permitido e válido
 				{
@@ -412,7 +392,7 @@ int Tabuleiro::verificaEstado(Posicao pos_rei) {
 			} else
 			return false;
 		} catch (...) {
-			cout << "Erro acesso indevido " << endl;
+			cout << "Erro: acesso indevido!" << endl;
 		}
 		return false;
 	}

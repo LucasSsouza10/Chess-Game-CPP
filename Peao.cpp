@@ -18,10 +18,8 @@ bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	//  a menos que ira capturar uma peca inimiga
 	if( origem.getColuna() != destino.getColuna() )
 	{
-		cout << "entrou ,  " << origem.getLinha() << " " << destino.getLinha()<< " " << cor <<endl;
 		if(((origem.getLinha() == destino.getLinha() + 1 && cor == 'P') || (origem.getLinha() == destino.getLinha() - 1 && cor == 'B')) && (origem.getColuna() == destino.getColuna() + 1 || origem.getColuna() == destino.getColuna() - 1))
 		{
-			cout << "entrou1" <<endl;
 		// para capturar a peca inimiga presisa estar lá
 			if(destino.isOcupada() && destino.getPca()->getCor() != cor) {
 				return true;

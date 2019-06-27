@@ -112,7 +112,7 @@ void Jogo::setVez(int v) {
 }
 
 //Classe que gerencia a partida
-void Jogo::playGame() {
+int Jogo::playGame() {
 	string move;
 	string nome;
 
@@ -135,25 +135,24 @@ void Jogo::playGame() {
 		//Notificando Estado do jogo quando é xeque
 		if (estado == 1){
 			cout << "Atenção, " << nome << " seu rei está em xeque!" << endl;
-			cout << "Se for xeque-mate digite 2" << endl;
+			cout << "Se for xeque-mate, digite 2" << endl;
 		}
 
 		//Pedido de entrada de movimento
-		cout << "Jogador " << nome
-				<< ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
+		cout << nome << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
 		getline(cin, move);
 
 		if (move.compare("0") == 0) { //condição para interromper o jogo
-			return;
+			return 0;
 		}
 
 		if (move.compare("2") == 0) { //desistir
 			if (vez == 2) {
 				cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
-				return;
+				return 1;
 			} else {
 				cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
-				return;
+				return 1;
 			}
 		}
 
@@ -162,16 +161,16 @@ void Jogo::playGame() {
 			getline(cin, move);
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
-				return;
+				return 0;
 			}
 
 			if (move.compare("2") == 0) {
 				if (vez == 2) {
 					cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
-					return;
+					return 1;
 				} else {
 					cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
-					return;
+					return 1;
 				}
 			}
 		}
@@ -182,15 +181,15 @@ void Jogo::playGame() {
 			getline(cin, move);
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
-				return;
+				return 0;
 			}
 
 			if (vez == 2) {
 				cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
-				return;
+				return 1;
 			} else {
 				cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
-				return;
+				return 1;
 			}
 
 			while (validarFormato(move) == false) {
@@ -198,15 +197,15 @@ void Jogo::playGame() {
 				getline(cin, move);
 
 				if (move.compare("0") == 0) { //condição para interromper o jogo
-					return;
+					return 0;
 				}
 
 				if (vez == 2) {
 					cout << "Parabéns, " << j1->getNome() << ", você venceu!"<< endl;
-					return;
+					return 1;
 				} else {
 					cout << "Parabéns, " << j2->getNome() << ", você venceu!"<< endl;
-					return;
+					return 1;
 				}
 			}
 		}
@@ -294,7 +293,6 @@ bool Jogo::mover(string m, int vez) {
 void Jogo::salvarEstado(string m) {
 	try {
 		ofstream out("JogoSalvo.txt", ios::app);
-		out << m << "\n";
 		out.close();
 	} catch (int x) {
 		cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
