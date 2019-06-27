@@ -7,6 +7,7 @@ using namespace std;
 //Entrada: matriz de pecas p
 Tabuleiro::Tabuleiro(Peca **p) { // @suppress("Class members should be properly initialized")
 	//construindo matriz de posicao
+	try{
 	pos = new Posicao*[8];
 
 	for (int i = 0; i < 8; ++i) {
@@ -34,6 +35,11 @@ Tabuleiro::Tabuleiro(Peca **p) { // @suppress("Class members should be properly 
 			else
 				pos[i][j].setCor('P');
 		}
+	}
+}catch(bad_alloc err)
+	{
+		cout << "Erro: " << err.what() << endl;
+
 	}
 }
 
@@ -79,6 +85,8 @@ void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
 bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 		int colunaDestino, char cor) {
 	cout << "movimenta" << endl;
+	try{
+	if(!(pos[linhaOrigem][colunaOrigem].isOcupada())) throw 99;
 	if (pos[linhaOrigem][colunaOrigem].getPca()->getCor() != cor) //Peça não pertence ao jogador
 		return false;
 
@@ -111,6 +119,15 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 	} else {
 		return false;
 	}
+	}catch(int x)
+		{
+			if(x==99) cout << "Posicao Selecionada Invalida" << endl;
+			return false;
+
+		}catch (...)
+		{
+			cout << "Erro" << endl;
+		}
 	return false;
 }
 
@@ -490,7 +507,7 @@ Posicao* Tabuleiro::procuraRei(char r) {
 //Entrada: pos_rei = posicao da peca rei; pos_adv: posicao do adversario
 //Saída: true se o rei pode ser capturado, false se não
 bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
-
+try{
 	Peca *adv = pos_adv.getPca();
 	Peca *r = pos_rei.getPca();
 
@@ -506,4 +523,9 @@ bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
 			return false;
 	} else
 		return false;
+}catch(...)
+{
+	cout << "Erro acesso indevido " << endl;
+}
+return false;
 }
