@@ -355,16 +355,12 @@ void Tabuleiro::captura(int linha, int coluna) {
 //Retorna se o rei está em xeque ou xeque-mate
 //Entrada: 'R' (jogador 1) ou 'r' (jogador 2)
 //Saida: 0 = sem risco; 1 = xeque; 2 = xeque-mate
-int Tabuleiro::verificaEstado(char r) {
-	cout << "verificaEstado" <<endl;
-	//Busca pela posicao do rei
-	Posicao *pos_rei = procuraRei(r);
-	int linha = pos_rei->getLinha() - 1;
-	int coluna = pos_rei->getColuna() - 1;
+int Tabuleiro::verificaEstado(Posicao pos_rei) {
+	int linha = pos_rei.getLinha() - 1;
+	int coluna = pos_rei.getColuna() - 1;
 	int cima = 0, baixo = 0, direita = 0, esquerda = 0, supEsq = 0, supDir = 0,
 			infEsq = 0, infDir = 0;
 
-	cout << "procurou o rei " << pos_rei->getLinha() << " " << pos_rei->getColuna() << endl;
 	for (int i = 0; i < 8; ++i) {
 		for (int j = 0; j < 8; ++j) {
 			if (pos[i][j].isOcupada())
@@ -382,7 +378,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((linha + 1 < 8 && !pos[linha + 1][coluna].isOcupada()) && cima != 1) { // verifica se rei pode se movimentar para cima
 										Posicao p = pos[linha+1][coluna];
-										p.setPca(pos_rei->getPca());
+										p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											cima = 1;
@@ -392,7 +388,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((linha - 1 >= 0 && !pos[linha - 1][coluna].isOcupada()) && baixo != 1) { // verifica se rei pode se movimentar para baixo
 										Posicao p = pos[linha-1][coluna];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 										if (checaRisco(p, pos[k][l]))
 											baixo = 1;
 									} else
@@ -401,7 +397,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((coluna - 1 >= 0 && !pos[linha][coluna - 1].isOcupada()) && esquerda != 1) { // verifica se rei pode se movimentar para esquerda
                                         Posicao p = pos[linha][coluna-1];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											esquerda = 1;
@@ -411,7 +407,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((coluna + 1 < 8 && !pos[linha][coluna + 1].isOcupada()) && direita != 1) { // verifica se rei pode se movimentar para direita
 										Posicao p = pos[linha][coluna+1];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											direita = 1;
@@ -421,7 +417,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((linha + 1 < 8 && coluna - 1 >= 0 && !pos[linha + 1][coluna - 1].isOcupada()) && supEsq != 1) { // verifica se rei pode se movimentar para diagonal superior esquerda
 										Posicao p = pos[linha+1][coluna-1];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											supEsq = 1;
@@ -432,7 +428,7 @@ int Tabuleiro::verificaEstado(char r) {
 									if ((linha + 1 < 8 && coluna + 1 < 8 && !pos[linha + 1][coluna + 1].isOcupada()) && supDir != 1) { // verifica se rei pode se movimentar para diagonal superior direita
 
 											Posicao p = pos[linha+1][coluna+1];
-											p.setPca(pos_rei->getPca());
+											p.setPca(pos_rei.getPca());
 											if (checaRisco(p, pos[k][l]))
 												supDir = 1;
 									} else
@@ -441,7 +437,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((linha - 1 >= 0 && coluna - 1 >= 0 && !pos[linha - 1][coluna - 1].isOcupada()) && infEsq != 1) { // verifica se rei pode se movimentar para diagonal inferior esquerda
                                         Posicao p = pos[linha-1][coluna-1];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											infEsq = 1;
@@ -451,7 +447,7 @@ int Tabuleiro::verificaEstado(char r) {
 
 									if ((linha - 1 >= 0 && coluna + 1 < 8 && !pos[linha - 1][coluna + 1].isOcupada()) && infDir != 1) { // verifica se rei pode se movimentar para diagonal inferior direita
 										Posicao p = pos[linha-1][coluna+1];
-                                        p.setPca(pos_rei->getPca());
+                                        p.setPca(pos_rei.getPca());
 
 										if (checaRisco(p, pos[k][l]))
 											infDir = 1;
@@ -486,6 +482,12 @@ Posicao* Tabuleiro::procuraRei(char r) {
 	return NULL;
 }
 
+//Verifica o estado do jogo para o rei passado
+int Tabuleiro::checaRei(char r){
+	Posicao *pos_rei = procuraRei(r);
+	return verificaEstado(*pos_rei);
+}
+
 //Verifica se o rei está em xeque
 //Entrada: pos_rei = posicao da peca rei; pos_adv: posicao do adversario
 //Saída: true se o rei pode ser capturado, false se não
@@ -506,4 +508,9 @@ bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
 			return false;
 	} else
 		return false;
+}
+
+//verifica se movimento deixa jogo em cheque
+bool verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna){
+
 }

@@ -161,10 +161,6 @@ void Jogo::playGame() {
 
 		cout << "voltou" << endl;
 		//verifica estado
-				if (vez == 2) {
-					estado = tab->verificaEstado('R');
-				} else
-					estado = tab->verificaEstado('r');
 
 		salvarEstado(move);
 	}
@@ -209,7 +205,6 @@ bool Jogo::validarFormato(string m) {
 
 //Move a peça
 bool Jogo::mover(string m, int vez) {
-	cout << "mover" <<endl;
 	int origemLinha, origemColuna, destinoLinha, destinoColuna;
 	origemLinha = m[1] - '1'; //para transformar o caractere em um int correspondente
 	origemColuna = toupper(m[0]) - 'A';
@@ -221,6 +216,15 @@ bool Jogo::mover(string m, int vez) {
 		cor = j1->getCor();
 	else
 		cor = j2->getCor();
+
+	if (vez == 2) {
+		estado = tab->checaRei('R');
+	} else
+		estado = tab->checaRei('r');
+
+	if(tab->verificaMovimento(origemLinha, origemColuna, destinoLinha, destinoColuna)){
+
+	}
 
 	return tab->movimenta(origemLinha, origemColuna, destinoLinha,
 			destinoColuna, cor);
