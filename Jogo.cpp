@@ -7,25 +7,24 @@ using namespace std;
 Jogo::Jogo(string n1, string n2) {
 	estado = 0;
 	vez = 2; //2 para quando iniciar o jogo comecar pelo jogador 1
-	try{
-	j1 = new Jogador(n1, 'B');
-	j2 = new Jogador(n2, 'P');
+	try {
+		j1 = new Jogador(n1, 'B');
+		j2 = new Jogador(n2, 'P');
 
-	//criando pecas
-	criarPecas();
-	//setando pecas para os jogadores
-	for (int i = 0; i < 16; ++i) {
-		j1->addPecas(p[i]);
-		j2->addPecas(p[i + 16]);
-	}
-
-	//criando tabuleiro e setando pecas
-	tab = new Tabuleiro(p);
-	}catch(bad_alloc ex)
-		{
-			cout << "Erro de alocação de memoria em jogo: " << ex.what() << endl;
-
+		//criando pecas
+		criarPecas();
+		//setando pecas para os jogadores
+		for (int i = 0; i < 16; ++i) {
+			j1->addPecas(p[i]);
+			j2->addPecas(p[i + 16]);
 		}
+
+		//criando tabuleiro e setando pecas
+		tab = new Tabuleiro(p);
+	} catch (bad_alloc ex) {
+		cout << "Erro de alocação de memoria em jogo: " << ex.what() << endl;
+
+	}
 
 }
 
@@ -33,21 +32,20 @@ Jogo::Jogo(string n1, string n2) {
 Jogo::Jogo() {
 	estado = 0;
 	vez = 0;
-	try{
-	j1 = new Jogador("Jogador1", 'B');
-	j2 = new Jogador("Jogador2", 'P');
-	//criando pecas
-	criarPecas();
-	//setando pecas para os jogadores
-	for (int i = 0; i < 16; ++i) {
-		j1->addPecas(p[i]);
-		j2->addPecas(p[i + 16]);
-	}
+	try {
+		j1 = new Jogador("Jogador1", 'B');
+		j2 = new Jogador("Jogador2", 'P');
+		//criando pecas
+		criarPecas();
+		//setando pecas para os jogadores
+		for (int i = 0; i < 16; ++i) {
+			j1->addPecas(p[i]);
+			j2->addPecas(p[i + 16]);
+		}
 
-	//criando tabuleiro e setando pecas
-	tab = new Tabuleiro(p);
-}catch(bad_alloc ex)
-	{
+		//criando tabuleiro e setando pecas
+		tab = new Tabuleiro(p);
+	} catch (bad_alloc ex) {
 		cout << "Erro de alocação de memoria em jogo: " << ex.what() << endl;
 
 	}
@@ -228,53 +226,55 @@ bool Jogo::mover(string m, int vez) {
 	else
 		cor = j2->getCor();
 
-	if (vez == 2) {
-		estado = tab->checaRei('R');
-	} else
-		estado = tab->checaRei('r');
-
-	if(tab->verificaMovimento(origemLinha, origemColuna, destinoLinha, destinoColuna)){
-
+	cout << "verificaMovimento" << endl;
+	if (tab->verificaMovimento(origemLinha, origemColuna, destinoLinha,
+			destinoColuna)) {
+		cout << "Esse movimento põe o rei em xeque!" << endl;
+		return false;
 	}
-
-	return tab->movimenta(origemLinha, origemColuna, destinoLinha,
+	bool movimenta = tab->movimenta(origemLinha, origemColuna, destinoLinha,
 			destinoColuna, cor);
+	if (movimenta)
+		if (vez == 2) {
+			estado = tab->checaRei('R');
+		} else
+			estado = tab->checaRei('r');
+	return movimenta;
+
 }
 
 //Salva o jogo
 void Jogo::salvarEstado(string m) {
-	try{
-	ofstream out("JogoSalvo.txt", ios::app);
-	out << m << "\n";
-	out.close();
-}catch(int x)
-	{
+	try {
+		ofstream out("JogoSalvo.txt", ios::app);
+		out << m << "\n";
+		out.close();
+	} catch (int x) {
 		cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
 	}
 }
 
 //Carrega o jogo
 void Jogo::carregar() {
-try{
-	ifstream read("JogoSalvo.txt");
-	string move;
+	try {
+		ifstream read("JogoSalvo.txt");
+		string move;
 
-	while (!read.eof()) {
-		getline(read, move);
-		if (validarFormato(move)) {
-			if (vez == 1) // para alterar a vez conforme é feito os movimentos primeiro a jogar 1
-				vez = 2;
-			else
-				vez = 1;
+		while (!read.eof()) {
+			getline(read, move);
+			if (validarFormato(move)) {
+				if (vez == 1) // para alterar a vez conforme é feito os movimentos primeiro a jogar 1
+					vez = 2;
+				else
+					vez = 1;
 
-			mover(move, vez);
+				mover(move, vez);
+			}
 		}
+		read.close();
+	} catch (int x) {
+		cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
 	}
-	read.close();
-}catch (int x)
-	{
-			cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
-		}
 }
 
 //Sobrescreve o arquivo de salvamento com um jogo novo

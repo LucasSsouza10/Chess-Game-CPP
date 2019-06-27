@@ -370,18 +370,18 @@ void Tabuleiro::captura(int linha, int coluna) {
 }
 
 //Retorna se o rei está em xeque ou xeque-mate
-//Entrada: 'R' (jogador 1) ou 'r' (jogador 2)
+//Entrada: posicao rei
 //Saida: 0 = sem risco; 1 = xeque; 2 = xeque-mate
 int Tabuleiro::verificaEstado(Posicao pos_rei) {
 	int linha = pos_rei.getLinha() - 1;
 	int coluna = pos_rei.getColuna() - 1;
-	int cima = 0, baixo = 0, direita = 0, esquerda = 0, supEsq = 0, supDir = 0,
-			infEsq = 0, infDir = 0;
+	int cima = 0, baixo = 0, direita = 0, esquerda = 0, supEsq = 0, supDir = 0, infEsq = 0, infDir = 0;
 
 	for (int i = 0; i < 8; ++i) {
 		for (int j = 0; j < 8; ++j) {
+			cout << "i = " << i << " j = " << j << endl;
 			if (pos[i][j].isOcupada())
-				if (checaRisco(pos[linha][coluna], pos[i][j])) { //se o rei estiver em risco ele esta em cheque
+				if (checaRisco(pos_rei, pos[i][j])) { //se o rei estiver em risco ele esta em cheque
 					//Agora tem que verificar se é cheque-mate
 					cout << "Rei em risco" << endl;
 					for (int k = 0; k < 8; ++k) {
@@ -509,11 +509,13 @@ int Tabuleiro::checaRei(char r){
 //Entrada: pos_rei = posicao da peca rei; pos_adv: posicao do adversario
 //Saída: true se o rei pode ser capturado, false se não
 bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
+
 try{
 	Peca *adv = pos_adv.getPca();
 	Peca *r = pos_rei.getPca();
 
-	cout << r->desenha() << " "<< adv->desenha() <<endl;
+	cout << adv << endl;
+	cout << r << endl;
 //Verifica se existe adversario
 	if (adv && adv->getCor() != r->getCor()) {
 		//Verifica se a peça inimiga pode capturar o rei
@@ -533,6 +535,12 @@ return false;
 }
 
 //verifica se movimento deixa jogo em cheque
-bool verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna){
+bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna){
+	cout << destinoLinha << " " << destinoColuna << endl;
+	Posicao p(pos[destinoLinha][destinoColuna]);
+	p.setPca(pos[origemLinha][origemColuna].getPca());
 
+	if(verificaEstado(p) == 0)
+		return false;
+	return true;
 }
