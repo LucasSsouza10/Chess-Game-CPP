@@ -472,13 +472,13 @@ int Tabuleiro::verificaEstado(Posicao pos_rei) {
 										infDir = 1;
 								}
 							}
-
-							cout << cima << baixo << esquerda << direita << supEsq << supDir << infEsq << infDir << endl;
-							if (cima == 1 && baixo == 1 && esquerda == 1 && direita == 1 && supEsq == 1 && supDir == 1 && infEsq == 1 && infDir == 1)
-								return 2;
 						}
 					}
-					return 1;
+
+					if (cima == 1 && baixo == 1 && esquerda == 1 && direita == 1 && supEsq == 1 && supDir == 1 && infEsq == 1 && infDir == 1)
+						return 2;
+					else
+						return 1;
 				}
 
 		}

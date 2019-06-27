@@ -114,14 +114,19 @@ void Jogo::setVez(int v) {
 //Classe que gerencia a partida
 void Jogo::playGame() {
 	string move;
+	string nome;
 
-	while (true) {
+	while (estado != 2) {
 
 		//depois de cada movimento trocamos a vez de jogar
-		if (vez == 1)
+		if (vez == 1){
 			vez = 2;
-		else
+			nome = j2->getNome();
+		}
+		else {
 			vez = 1;
+			nome = j1->getNome();
+		}
 
 		string detalheJ1 = j1->getNome() + ": " + j1->getMortas();
 		string detalheJ2 = j2->getNome() + ": " + j2->getMortas();
@@ -132,8 +137,7 @@ void Jogo::playGame() {
 		cout << estado << endl;
 
 		//Pedido de entrada de movimento
-		cout << "Jogador " << vez
-				<< ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
+		cout << "Jogador " << nome << ", entre com seu movimento, ou digite 0 para encerrar a partida: ";
 		getline(cin, move);
 
 		if (move.compare("0") == 0) { //condição para interromper o jogo
@@ -167,12 +171,14 @@ void Jogo::playGame() {
 				}
 			}
 		}
-
-		cout << "voltou" << endl;
-		//verifica estado
-
 		salvarEstado(move);
 	}
+
+	if(vez == 2){
+		cout << "Parabéns " << j1->getNome() << " você venceu! " << endl;
+	}else
+		cout << "Parabéns " << j2->getNome() << " você venceu! " << endl;
+
 }
 
 //Verifica se o usuário digitou o movimento no formato correto ("pos. inicial -> pos. final)
