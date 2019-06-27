@@ -532,14 +532,19 @@ bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna,
 		int destinoLinha, int destinoColuna) {
 	bool v = true;
 	Peca *destino = pos[destinoLinha][destinoColuna].getPca();
+
 	Peca *origem = pos[origemLinha][origemColuna].getPca();
 
 	pos[destinoLinha][destinoColuna].setPca(origem);
+
 	pos[origemLinha][origemColuna].setPca(NULL);
 
 	char rei;
+	if(origem==NULL) throw 99;
 	if (origem->getCor() == 'B')
+
 		rei = 'B';
+
 	else
 		rei = 'r';
 
