@@ -17,7 +17,6 @@ public:
 	Tabuleiro(Peca **p);	//responsavel pela configuração inicial do tabuleiro
 	bool movimenta(int, int, int, int, char); //responsável pela movimentação das peças
 	void desenharTabuleiro(std::string, std::string); //desenha o tabuleiro na tela
-	Posicao getPosicao(int linha, int coluna);
 	int checaRei(char r); //Retorna se o rei está em xeque ou xeque-mate
 	bool verificaMovimento(int, int, int, int); //verifica se movimento deixa jogo em cheque
 };
