@@ -85,7 +85,7 @@ void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
 bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 		int colunaDestino, char cor) {
 	cout << "movimenta" << endl;
-	try{
+
 	if(!(pos[linhaOrigem][colunaOrigem].isOcupada())) throw 99;
 	if (pos[linhaOrigem][colunaOrigem].getPca()->getCor() != cor) //Peça não pertence ao jogador
 		return false;
@@ -119,16 +119,7 @@ bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
 	} else {
 		return false;
 	}
-	}catch(int x)
-		{
-			if(x==99) cout << "Posicao Selecionada Invalida" << endl;
-			return false;
-
-		}catch (...)
-		{
-			cout << "Erro" << endl;
-		}
-	return false;
+return false;
 }
 
 //Verifica se existe alguma peça nas posições entre a origem e o destino
@@ -538,13 +529,10 @@ return false;
 bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna){
 	cout << destinoLinha << " " << destinoColuna << endl;
 	Posicao p(pos[destinoLinha][destinoColuna]);
-	try{
+
 	if(!(pos[origemLinha][origemColuna].isOcupada())) throw 99;
 	p.setPca(pos[origemLinha][origemColuna].getPca());
-	}catch (int x){
-		if (x==99)
-		return false;
-	}if(verificaEstado(p) == 0)
+	if(verificaEstado(p) == 0)
 		return false;
 	return true;
 }

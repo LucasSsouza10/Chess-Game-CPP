@@ -231,7 +231,7 @@ bool Jogo::mover(string m, int vez) {
 		cor = j1->getCor();
 	else
 		cor = j2->getCor();
-
+try{
 	cout << "verificaMovimento" << endl;
 	if (tab->verificaMovimento(origemLinha, origemColuna, destinoLinha,
 			destinoColuna)) {
@@ -246,7 +246,17 @@ bool Jogo::mover(string m, int vez) {
 		} else
 			estado = tab->checaRei('r');
 	return movimenta;
-
+}catch(int x){
+	if(x==99)
+	{
+		cout << "Posicaçao selecionada Invalida" << endl;
+		return false;
+	}
+}catch (exception ex)
+{
+	cout << "Erro desconhecido" << ex.what() << endl;
+	return false;
+}
 }
 
 //Salva o jogo
