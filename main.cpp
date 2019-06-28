@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
+    setlocale(LC_ALL,"");
 	cout << "----------- XADREZ -----------" << endl;
 	char n;
 	cout << "Deseja inserir nome? (S/N)" << endl;
@@ -46,8 +47,22 @@ int main() {
 			}
 
 			cin.ignore();
-			jogo.playGame();
-			cout << "Jogo finalizado." << endl;
+
+			j = jogo.playGame();
+
+			char jogar_novamente='N';
+
+			if (j==1) {
+                cout << "Deseja jogar novamente? (S/N)" << endl;
+                cin >> jogar_novamente;
+			}
+
+			if (toupper(jogar_novamente) == 'S')
+                j = 2;
+            else {
+                j = 0;
+                cout << "Jogo finalizado." << endl;
+            }
 
 		} else {
 

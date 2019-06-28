@@ -157,7 +157,7 @@ int Jogo::playGame() {
 		}
 
 		while (validarFormato(move) == false) {
-			cout << vez << "     " << "Formato invalido. Tente novamente: ";
+			cout << "Formato invalido. Tente novamente: ";
 			getline(cin, move);
 
 			if (move.compare("0") == 0) { //condição para interromper o jogo
