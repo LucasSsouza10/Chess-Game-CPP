@@ -293,6 +293,7 @@ bool Jogo::mover(string m, int vez) {
 void Jogo::salvarEstado(string m) {
 	try {
 		ofstream out("JogoSalvo.txt", ios::app);
+		if(out.fail())throw 5;
 		out << m << "\n";
 		out.close();
 	} catch (int x) {
@@ -305,7 +306,7 @@ void Jogo::carregar() {
 	try {
 		ifstream read("JogoSalvo.txt");
 		string move;
-
+		if(read.fail())throw 5;
 		while (!read.eof()) {
 			getline(read, move);
 			if (validarFormato(move)) {
