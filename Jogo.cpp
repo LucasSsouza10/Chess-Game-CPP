@@ -134,7 +134,7 @@ int Jogo::playGame() {
 
 		//Notificando Estado do jogo quando é xeque
 		if (estado == 1){
-			cout << "Atenção, " << nome << " seu rei está em xeque!" << endl;
+			cout << "Atenção, " << nome << ", seu rei está em xeque!" << endl;
 			cout << "Se for xeque-mate, digite 2" << endl;
 		}
 

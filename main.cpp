@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-	cout << "---------- XADREZ ----------" << endl;
+	cout << "----------- XADREZ -----------" << endl;
 	char n;
 	cout << "Deseja inserir nome? (S/N)" << endl;
 	cin >> n;

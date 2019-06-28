@@ -8,6 +8,8 @@ Peao::Peao(char c) : Peca(c){
 }
 
 //Verifica o movimento de cada peça
+//Entrada; Posição de origem e posição de destino
+//Saída:
 bool Peao::checaMovimento(Posicao origem, Posicao destino){
 	if((cor == 'B' && origem.getLinha() > destino.getLinha()) ||
 		(cor == 'P' && origem.getLinha() < destino.getLinha()))

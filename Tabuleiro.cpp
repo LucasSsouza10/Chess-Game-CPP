@@ -45,23 +45,23 @@ Tabuleiro::Tabuleiro(Peca **p) { // @suppress("Class members should be properly 
 //Desenha o tabuleiro na tela
 //Entrada: nomes dos jogadores
 void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
-    cout << endl;
+	cout << endl;
 	cout
-			<< "     A     B     C     D     E     F     G     H                        Peças Mortas"
-			<< endl;
+	        << "     A     B     C     D     E     F     G     H                        Peças Mortas"
+	        << endl;
 	for (int i = 7; i >= 0; --i) {
 		if (i == 7) {
 			cout
-					<< "   #################################################                    "
-					<< detalhes1 << endl;
+			        << "   #################################################                    "
+			        << detalhes1 << endl;
 			cout
-					<< "   #     #     #     #     #     #     #     #     #                    "
-					<< detalhes2 << endl;
+			        << "   #     #     #     #     #     #     #     #     #                    "
+			        << detalhes2 << endl;
 		} else {
 			cout << "   #################################################"
-					<< endl;
+			     << endl;
 			cout << "   #     #     #     #     #     #     #     #     #"
-					<< endl;
+			     << endl;
 
 		}
 
@@ -83,7 +83,7 @@ void Tabuleiro::desenharTabuleiro(string detalhes1, string detalhes2) {
 //Entrada: linhas de origem e destino, colunas de origem e destino e a cor do jogador
 //Saida: true (movimento valido) ou false (movimento invalido)
 bool Tabuleiro::movimenta(int linhaOrigem, int colunaOrigem, int linhaDestino,
-		int colunaDestino, char cor) {
+                          int colunaDestino, char cor) {
 
 	if (!(pos[linhaOrigem][colunaOrigem].isOcupada()))
 		throw 99;
@@ -167,8 +167,7 @@ bool Tabuleiro::checaCaminho(int linhaOrigem, int colunaOrigem, int linhaDestino
 						aux++;
 					}
 					return true;
-				}
-			else if (linhaDestino > linhaOrigem) { //movendo-se de baixo para cima
+				} else if (linhaDestino > linhaOrigem) { //movendo-se de baixo para cima
 				aux = 1;
 				while (linhaOrigem + aux != linhaDestino) {
 					if (pos[linhaOrigem + aux][colunaOrigem].isOcupada())
@@ -355,76 +354,76 @@ int Tabuleiro::verificaEstado(Posicao pos_rei) {
 //Busca pela posição do rei no tabuleiro
 //Entrada: 'R' (jogador 1) ou 'r' (jogador 2)
 //Saida: posicao onde o rei se encontra
-	Posicao* Tabuleiro::procuraRei(char r) {
-		for (int i = 0; i < 8; i++)
+Posicao* Tabuleiro::procuraRei(char r) {
+	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++) {
 			Peca *p = (pos[i][j].getPca());
 			if (p && (p->desenha()) == r)
-			return &pos[i][j];
+				return &pos[i][j];
 		}
-		return NULL;
-	}
+	return NULL;
+}
 
 //Verifica o estado do jogo para o rei passado
-	int Tabuleiro::checaRei(char r) {
-		Posicao *pos_rei = procuraRei(r);
-		return verificaEstado(*pos_rei);
-	}
+int Tabuleiro::checaRei(char r) {
+	Posicao *pos_rei = procuraRei(r);
+	return verificaEstado(*pos_rei);
+}
 
 //Verifica se o rei está em xeque
 //Entrada: pos_rei = posicao da peca rei; pos_adv: posicao do adversario
 //Saída: true se o rei pode ser capturado, false se não
-	bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
+bool Tabuleiro::checaRisco(Posicao pos_rei, Posicao pos_adv) {
 
-		try {
-			Peca *adv = pos_adv.getPca();
-			Peca *r = pos_rei.getPca();
+	try {
+		Peca *adv = pos_adv.getPca();
+		Peca *r = pos_rei.getPca();
 //Verifica se existe adversario
-			if (adv && adv->getCor() != r->getCor()) {
-				//Verifica se a peça inimiga pode capturar o rei
-				if (adv->checaMovimento(pos_adv, pos_rei) && checaCaminho(pos_adv.getLinha() - 1,
-								pos_adv.getColuna() - 1, pos_rei.getLinha() - 1,
-								pos_rei.getColuna() - 1))//Verifica se o movimento é permitido e válido
-				{
-					return true; //A peça pode capturar o rei
-				} else
-				return false;
+		if (adv && adv->getCor() != r->getCor()) {
+			//Verifica se a peça inimiga pode capturar o rei
+			if (adv->checaMovimento(pos_adv, pos_rei) && checaCaminho(pos_adv.getLinha() - 1,
+			        pos_adv.getColuna() - 1, pos_rei.getLinha() - 1,
+			        pos_rei.getColuna() - 1)) { //Verifica se o movimento é permitido e válido
+				return true; //A peça pode capturar o rei
 			} else
+				return false;
+		} else
 			return false;
-		} catch (...) {
-			cout << "Erro: acesso indevido!" << endl;
-		}
-		return false;
+	} catch (...) {
+		cout << "Erro: acesso indevido!" << endl;
 	}
+	return false;
+}
 
 //verifica se movimento deixa jogo em cheque
-	bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna,
-			int destinoLinha, int destinoColuna) {
-		bool v = true;
-		Peca *destino = pos[destinoLinha][destinoColuna].getPca();
+//Entrada: linhas e colunas de origem e destino
+//Saída: true se o movimento é permitido e false caso contrário
+bool Tabuleiro::verificaMovimento(int origemLinha, int origemColuna, int destinoLinha, int destinoColuna) {
+	bool v = true;
+	Peca *destino = pos[destinoLinha][destinoColuna].getPca();
 
-		Peca *origem = pos[origemLinha][origemColuna].getPca();
+	Peca *origem = pos[origemLinha][origemColuna].getPca();
 
-		pos[destinoLinha][destinoColuna].setPca(origem);
+	pos[destinoLinha][destinoColuna].setPca(origem);
 
-		pos[origemLinha][origemColuna].setPca(NULL);
+	pos[origemLinha][origemColuna].setPca(NULL);
 
-		char rei;
-		if (origem == NULL)
+	char rei;
+	if (origem == NULL)
 		throw 99;
-		if (origem->getCor() == 'B')
+	if (origem->getCor() == 'B')
 
 		rei = 'B';
 
-		else
+	else
 		rei = 'r';
 
-		if (checaRei(rei) == 0) {
-			v = false;
-		}
-
-		pos[destinoLinha][destinoColuna].setPca(destino);
-		pos[origemLinha][origemColuna].setPca(origem);
-		return v;
-
+	if (checaRei(rei) == 0) {
+		v = false;
 	}
+
+	pos[destinoLinha][destinoColuna].setPca(destino);
+	pos[origemLinha][origemColuna].setPca(origem);
+	return v;
+
+}
