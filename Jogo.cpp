@@ -116,7 +116,7 @@ int Jogo::playGame() {
 	string move;
 	string nome;
 
-	while (move.compare("2") != 0) {
+	while (true) {
 
 		//depois de cada movimento trocamos a vez de jogar
 		if (vez == 1) {
@@ -293,6 +293,7 @@ bool Jogo::mover(string m, int vez) {
 void Jogo::salvarEstado(string m) {
 	try {
 		ofstream out("JogoSalvo.txt", ios::app);
+		out << m << "\n";
 		out.close();
 	} catch (int x) {
 		cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
@@ -318,7 +319,7 @@ void Jogo::carregar() {
 		}
 		read.close();
 	} catch (int x) {
-		cout << "Excessao: Não foi possivel abrir o arquivo" << endl;
+		cout << "Erro: não foi possivel abrir o arquivo" << endl;
 	}
 }
 
